@@ -293,7 +293,7 @@ a {
 .menu-grid {
     display: grid;
     /* Говорим браузеру: "делай колонки шириной минимум 400px. Если они не помещаются — переносы их на новую строку автоматически!" */
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr));
     gap: 40px 80px;
     /* Отступы между карточками: 40px по вертикали, 80px по горизонтали */
 }
@@ -351,7 +351,7 @@ a {
 
 .shop-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
     gap: 40px;
     justify-items: center;
 }
@@ -1380,9 +1380,10 @@ a {
     color: #d4af37;
 }
 
-.checkout-btn {
-    width: 100%;
+.demo-checkout-note {
     text-align: center;
+    color: #d2c7b0;
+    font-size: .875rem;
 }
 
 /* ТЕМНЫЙ ФОН-ОБЕНТКА (Затемнение остального сайта) */
@@ -1610,7 +1611,7 @@ a {
 
 .testimonials-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
     gap: 30px;
 }
 

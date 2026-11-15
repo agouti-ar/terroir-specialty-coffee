@@ -924,9 +924,9 @@ const dictionary = {
         nav_reviews: "REVIEWS",
         nav_location: "LOCATION",
 
-        hero_subtitle: "SPECIALTY COFFEE EXPERIENCE",
+        hero_subtitle: "SPECIALTY COFFEE CONCEPT",
         hero_title: "Crafted by Nature, Perfected by Us",
-        hero_desc: "Explore our local brew house menu or order exclusive single-origin beans delivered directly to your door.",
+        hero_desc: "Explore a coffee menu, browse single-origin beans and try the taste quiz.",
         btn_shop: "SHOP BEANS",
         btn_menu: "VIEW MENU",
 
@@ -1009,7 +1009,7 @@ const dictionary = {
         quiz_restart: "Take Quiz Again",
 
         // Testimonials Section
-        reviews_subtitle: "Guest Experiences",
+        reviews_subtitle: "Demo content",
         reviews_title: "What Coffee Lovers Say",
         review1_name: "Elena Rostova",
         review1_role: "Coffee Enthusiast",
@@ -1037,7 +1037,7 @@ const dictionary = {
         cart_clear_btn: "Clear All",
         cart_empty: "Your bag is empty.",
         cart_total_label: "Total:",
-        cart_checkout: "Proceed to Checkout",
+        cart_checkout: "Demo bag. Orders and payments are unavailable.",
 
         // Admin & Footer
         admin_access: "Admin Access",
@@ -1052,9 +1052,9 @@ const dictionary = {
         nav_reviews: "OPINIONES",
         nav_location: "UBICACIÓN",
 
-        hero_subtitle: "EXPERIENCIA DE CAFÉ DE ESPECIALIDAD",
+        hero_subtitle: "CONCEPTO DE CAFÉ DE ESPECIALIDAD",
         hero_title: "Creado por la Naturaleza, Perfeccionado por Nosotros",
-        hero_desc: "Explora el menú de nuestra cafetería o pide granos de origen único exclusivos entregados en tu puerta.",
+        hero_desc: "Explora la carta, descubre cafés de origen único y prueba el cuestionario de sabores.",
         btn_shop: "COMPRAR CAFÉ",
         btn_menu: "VER MENÚ",
 
@@ -1137,7 +1137,7 @@ const dictionary = {
         quiz_restart: "Repetir Test",
 
         // Testimonials Section
-        reviews_subtitle: "Experiencias de Clientes",
+        reviews_subtitle: "Contenido de demostración",
         reviews_title: "Lo Que Dicen los Amantes del Café",
         review1_name: "Elena Rostova",
         review1_role: "Entusiasta del Café",
@@ -1165,7 +1165,7 @@ const dictionary = {
         cart_clear_btn: "Vaciar todo",
         cart_empty: "Tu bolsa está vacía.",
         cart_total_label: "Total:",
-        cart_checkout: "Proceder al Pago",
+        cart_checkout: "Cesta de demostración. No se aceptan pedidos ni pagos.",
 
         // Admin & Footer
         admin_access: "Acceso Admin",
@@ -1180,9 +1180,9 @@ const dictionary = {
         nav_reviews: "ВІДГУКИ",
         nav_location: "ЛОКАЦІЯ",
 
-        hero_subtitle: "СПЕЦІАЛЬНИЙ КАВОВИЙ ДОСВІД",
+        hero_subtitle: "КОНЦЕПТ КАВ’ЯРНІ СПЕШЕЛТІ",
         hero_title: "Створено Природою, Доведено до Досконалості Нами",
-        hero_desc: "Досліджуйте меню нашої кав'ярні або замовляйте ексклюзивні крафтові зерна з доставкою до дверей.",
+        hero_desc: "Перегляньте меню кав’ярні та каталог зерна або спробуйте тест на кавові вподобання.",
         btn_shop: "КУПИТИ КАВУ",
         btn_menu: "ДИВИТИСЯ МЕНЮ",
 
@@ -1265,7 +1265,7 @@ const dictionary = {
         quiz_restart: "Пройти тест знову",
 
         // Testimonials Section
-        reviews_subtitle: "Враження Гостей",
+        reviews_subtitle: "Демонстраційний вміст",
         reviews_title: "Що Кажуть Поціновувачі Кави",
         review1_name: "Олена Ростова",
         review1_role: "Кавова Ентузіастка",
@@ -1293,7 +1293,7 @@ const dictionary = {
         cart_clear_btn: "Очистити все",
         cart_empty: "Ваш кошик порожній.",
         cart_total_label: "Разом:",
-        cart_checkout: "Оформити замовлення",
+        cart_checkout: "Демонстраційний кошик. Замовлення та оплата недоступні.",
 
         // Admin & Footer
         admin_access: "Адмін-доступ",
