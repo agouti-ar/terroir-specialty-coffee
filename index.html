@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Coffee Concept</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Great+Vibes&family=Montserrat:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,600;1,400&display=swap"
+        rel="stylesheet">
+    <!-- Leaflet.js for Interactive Dark Map -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="logo">TERROIR.</div>
+        <nav class="nav">
+            <a href="#menu" class="nav-link" data-i18n="nav_menu">MENU</a>
+            <a href="#shop" class="nav-link" data-i18n="nav_shop">SHOP</a>
+            <a href="#story" class="nav-link" data-i18n="nav_story">STORY</a>
+            <a href="#ai-barista" class="nav-link" data-i18n="nav_barista">AI BARISTA</a>
+            <a href="#reviews" class="nav-link" data-i18n="nav_reviews">REVIEWS</a>
+            <a href="#location" class="nav-link" data-i18n="nav_location">LOCATION</a>
+        </nav>
+        <div class="header-actions">
+            <!-- Кнопка корзины -->
+            <button id="cartIcon" class="cart-icon-btn" aria-label="Shopping Bag">
+                <span class="cart-icon-symbol">🛒</span>
+                <span id="cartCounter" class="cart-counter">0</span>
+            </button>
+
+            <!-- Переключатель языков -->
+            <div class="lang-select-wrapper">
+                <button id="langBtn" class="lang-current-btn">
+                    <span id="currentLangLabel">EN</span> ▾
+                </button>
+                <ul id="langDropdown" class="lang-dropdown">
+                    <li data-lang="en" class="lang-option active">EN</li>
+                    <li data-lang="es" class="lang-option">ES</li>
+                    <li data-lang="ua" class="lang-option">UA</li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content reveal-on-scroll">
+            <p class="hero-subtitle" data-i18n="hero_subtitle">SPECIALTY COFFEE EXPERIENCE</p>
+            <h1 class="hero-title" data-i18n="hero_title">Crafted by Nature, Perfected by Us</h1>
+            <p class="hero-description" data-i18n="hero_desc">Explore our local brew house menu or order exclusive
+                single-origin beans delivered directly to your door.</p>
+            <div class="hero-buttons">
+                <a href="#shop" class="btn btn-primary" data-i18n="btn_shop">SHOP BEANS</a>
+                <a href="#menu" class="btn btn-secondary" data-i18n="btn_menu">VIEW MENU</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="menu" class="menu-section">
+        <div class="section-title-wrapper reveal-on-scroll">
+            <span class="section-subtitle" data-i18n="menu_subtitle">Freshly Brewed Every Day</span>
+            <h2 class="section-title" data-i18n="menu_title">Barista Menu</h2>
+        </div>
+
+        <div class="menu-grid">
+            <div class="menu-item reveal-on-scroll reveal-delay-1">
+                <div class="menu-item-info">
+                    <h3 class="menu-item-name">Espresso</h3>
+                    <span class="menu-item-line"></span>
+                    <span class="menu-item-price">€2.50</span>
+                </div>
+                <p class="menu-item-description" data-i18n="menu_espresso_desc">Classic rich shot of espresso with a
+                    dense golden crema.</p>
+            </div>
+
+            <div class="menu-item reveal-on-scroll reveal-delay-2">
+                <div class="menu-item-info">
+                    <h3 class="menu-item-name">Cappuccino</h3>
+                    <span class="menu-item-line"></span>
+                    <span class="menu-item-price">€3.80</span>
+                </div>
+                <p class="menu-item-description" data-i18n="menu_cappuccino_desc">Equal parts of espresso, steamed milk,
+                    and velvety milk foam.</p>
+            </div>
+
+            <div class="menu-item reveal-on-scroll reveal-delay-3">
+                <div class="menu-item-info">
+                    <h3 class="menu-item-name">Flat White</h3>
+                    <span class="menu-item-line"></span>
+                    <span class="menu-item-price">€4.20</span>
+                </div>
+                <p class="menu-item-description" data-i18n="menu_flatwhite_desc">Double shot of espresso with microfoam,
+                    smooth and strong.</p>
+            </div>
+
+            <div class="menu-item reveal-on-scroll reveal-delay-4">
+                <div class="menu-item-info">
+                    <h3 class="menu-item-name" data-i18n="menu_latte_title">Smoked Caramel Latte</h3>
+                    <span class="menu-item-line"></span>
+                    <span class="menu-item-price">€4.90</span>
+                </div>
+                <p class="menu-item-description" data-i18n="menu_latte_desc">Our signature latte with house-made smoked
+                    caramel syrup.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="shop" class="shop-section">
+        <div class="section-title-wrapper reveal-on-scroll">
+            <span class="section-subtitle" data-i18n="shop_subtitle">Single-Origin & Blends</span>
+            <h2 class="section-title" data-i18n="shop_title">Whole Bean Coffee</h2>
+        </div>
+
+        <!-- Catalog Controls: Search & Filter Chips -->
+        <div class="catalog-controls reveal-on-scroll">
+            <div class="catalog-search-wrapper">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="catalogSearchInput" class="catalog-search-input" placeholder="Search coffee..."
+                    data-i18n-placeholder="search_placeholder" autocomplete="off">
+                <button type="button" id="catalogSearchClear" class="catalog-search-clear" title="Clear search"
+                    aria-label="Clear search">&times;</button>
+            </div>
+
+            <div class="catalog-filter-chips" id="catalogFilterChips">
+                <button type="button" class="filter-chip active" data-filter="all" data-i18n="filter_all">All</button>
+                <button type="button" class="filter-chip" data-filter="bestseller"
+                    data-i18n="filter_bestseller">Bestsellers</button>
+                <button type="button" class="filter-chip" data-filter="new" data-i18n="filter_new">New</button>
+                <button type="button" class="filter-chip" data-filter="single_origin"
+                    data-i18n="filter_single_origin">Single Origin</button>
+                <button type="button" class="filter-chip" data-filter="special"
+                    data-i18n="filter_special">Special</button>
+            </div>
+        </div>
+
+        <div class="shop-grid" id="shop-grid">
+            <!-- Dynamic items rendered from localStorage via app.js -->
+        </div>
+    </section>
+
+    <!-- Exclusive Brand Story Section: Andy from Madrid -->
+    <section id="story" class="story-section">
+        <div class="story-container reveal-on-scroll">
+            <div class="story-card">
+                <div class="story-header">
+                    <span class="story-badge" data-i18n="story_tag">MADRID & SEVILLE VIBES</span>
+                    <span class="section-subtitle" data-i18n="story_subtitle">Our Inspiration & Story</span>
+                    <h2 class="story-title" data-i18n="story_title">Crafted with Soul, Dedicated to Andy</h2>
+                </div>
+                <div class="story-body">
+                    <p class="story-text" data-i18n="story_desc">
+                        Crafted under the impression of Spanish streets and dedicated to our muse Andy from Madrid. A
+                        blend created for those who need warmth, care, and flawless coffee on every shift.
+                    </p>
+                </div>
+                <div class="story-promo-banner">
+                    <div class="promo-badge-tag">10% OFF</div>
+                    <div class="promo-info">
+                        <span class="promo-title" data-i18n="story_banner_title">Exclusive Tasting Gift</span>
+                        <p class="promo-text" data-i18n="story_banner_text">Use code <span
+                                class="promo-code-highlight">ANDY10</span> for 10% off your first bag</p>
+                    </div>
+                    <button type="button" class="promo-copy-btn" id="copyPromoBtn" data-code="ANDY10">
+                        <span id="copyPromoText" data-i18n="story_copy_code">Copy Code</span>
+                    </button>
+                </div>
+                <div class="story-signature-wrapper">
+                    <span class="story-signature" data-i18n="story_signature">~ Dedicated to Andy, Madrid ~</span>
+                    <div class="brand-signature-badge" data-i18n="story_badge">Crafted with Love & Specialty Grain</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="ai-barista" class="ai-section">
+        <div class="ai-container reveal-on-scroll">
+            <div class="ai-content">
+                <span class="section-subtitle" data-i18n="ai_subtitle">Intelligent Selection</span>
+                <h2 class="section-title" data-i18n="ai_title">Find Your Perfect Match</h2>
+                <p class="ai-description" data-i18n="ai_desc">Answer a few questions about your taste preferences, and
+                    our trained AI
+                    Concierge will select the ideal single-origin bean for your morning ritual.</p>
+
+                <div class="ai-quiz-card" id="quiz-card">
+                    <div class="quiz-step active" id="step-1">
+                        <h3 data-i18n="quiz_q1">1. What's your preferred roast profile?</h3>
+                        <div class="quiz-options">
+                            <button class="quiz-btn" data-param="roast" data-value="light"
+                                data-i18n="quiz_opt_light">Light & Fruity (Bright
+                                acidity)</button>
+                            <button class="quiz-btn" data-param="roast" data-value="dark" data-i18n="quiz_opt_dark">Dark
+                                & Chocolatey (Rich,
+                                bold)</button>
+                        </div>
+                    </div>
+
+                    <div class="quiz-step" id="step-2" style="display: none;">
+                        <h3 data-i18n="quiz_q2">2. How do you usually brew your coffee?</h3>
+                        <div class="quiz-options">
+                            <button class="quiz-btn" data-param="brew" data-value="filter"
+                                data-i18n="quiz_opt_filter">Filter / Cezve (Turk) /
+                                Drip</button>
+                            <button class="quiz-btn" data-param="brew" data-value="espresso"
+                                data-i18n="quiz_opt_espresso">Espresso Machine / Moka
+                                Pot</button>
+                        </div>
+                    </div>
+
+                    <div class="quiz-result" id="quiz-result" style="display: none;">
+                        <span class="section-subtitle" data-i18n="quiz_match">Your Perfect Match Is</span>
+                        <h3 class="result-title" id="result-title">Ethiopia Yirgacheffe</h3>
+                        <p class="result-description" id="result-description">Based on your taste profile, we highly
+                            recommend this origin.</p>
+                        <button class="btn btn-primary" id="quiz-restart-btn" data-i18n="quiz_restart"
+                            style="margin-top: 25px; padding: 10px 25px; font-size: 12px;">Take Quiz Again</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Секция отзывов гостей -->
+    <section id="reviews" class="testimonials-section">
+        <div class="section-title-wrapper reveal-on-scroll">
+            <span class="section-subtitle" data-i18n="reviews_subtitle">Guest Experiences</span>
+            <h2 class="section-title" data-i18n="reviews_title">What Coffee Lovers Say</h2>
+        </div>
+
+        <div class="testimonials-grid">
+            <div class="testimonial-card reveal-on-scroll reveal-delay-1">
+                <div class="testimonial-header">
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop"
+                        alt="Elena Rostova" class="testimonial-avatar">
+                    <div class="testimonial-info">
+                        <h4 class="testimonial-name" data-i18n="review1_name">Elena Rostova</h4>
+                        <span class="testimonial-role" data-i18n="review1_role">Coffee Enthusiast</span>
+                    </div>
+                </div>
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-text" data-i18n="review1_text">"The Ethiopia Yirgacheffe brewed on V60 here is
+                    mind-blowing. Subtle jasmine notes and incredible clarity. Terroir is my daily ritual!"</p>
+            </div>
+
+            <div class="testimonial-card reveal-on-scroll reveal-delay-2">
+                <div class="testimonial-header">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop"
+                        alt="Marcus Vance" class="testimonial-avatar">
+                    <div class="testimonial-info">
+                        <h4 class="testimonial-name" data-i18n="review2_name">Marcus Vance</h4>
+                        <span class="testimonial-role" data-i18n="review2_role">Architect & Designer</span>
+                    </div>
+                </div>
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-text" data-i18n="review2_text">"Atmosphere, design, and consistency. The AI
+                    Barista recommended Colombia El Paraiso, and it matched my taste profile perfectly."</p>
+            </div>
+
+            <div class="testimonial-card reveal-on-scroll reveal-delay-3">
+                <div class="testimonial-header">
+                    <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=200&auto=format&fit=crop"
+                        alt="Sophia Martinez" class="testimonial-avatar">
+                    <div class="testimonial-info">
+                        <h4 class="testimonial-name" data-i18n="review3_name">Sophia Martinez</h4>
+                        <span class="testimonial-role" data-i18n="review3_role">Food & Travel Critic</span>
+                    </div>
+                </div>
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-text" data-i18n="review3_text">"Smoked Caramel Latte is hands down the best
+                    signature drink in town. Fast delivery of fresh whole bean coffee right to my doorstep."</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Секция локации и часов работы -->
+    <section id="location" class="location-section">
+        <div class="section-title-wrapper reveal-on-scroll">
+            <span class="section-subtitle" data-i18n="location_subtitle">Visit Our House</span>
+            <h2 class="section-title" data-i18n="location_title">Location & Hours</h2>
+        </div>
+
+        <div class="location-container">
+            <div class="location-cards">
+                <div class="location-info-card reveal-on-scroll reveal-delay-1">
+                    <div class="location-icon">📍</div>
+                    <div>
+                        <h4 data-i18n="loc_address_title">Address</h4>
+                        <p data-i18n="loc_address_val">74 Grand Avenue, Coffee Quarter</p>
+                        <span class="location-hint" data-i18n="loc_address_hint">Corner of 4th Street</span>
+                    </div>
+                </div>
+
+                <div class="location-info-card reveal-on-scroll reveal-delay-2">
+                    <div class="location-icon">⏰</div>
+                    <div>
+                        <h4 data-i18n="loc_hours_title">Opening Hours</h4>
+                        <p data-i18n="loc_hours_val">Mon - Fri: 07:30 AM - 08:00 PM</p>
+                        <p data-i18n="loc_hours_weekend">Sat - Sun: 08:30 AM - 09:00 PM</p>
+                    </div>
+                </div>
+
+                <div class="location-info-card reveal-on-scroll reveal-delay-3">
+                    <div class="location-icon">📞</div>
+                    <div>
+                        <h4 data-i18n="loc_contact_title">Contact & Bookings</h4>
+                        <p>+34 912 345 678</p>
+                        <p class="location-hint">hello@terroircoffee.com</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="location-map-wrapper reveal-on-scroll reveal-delay-2">
+                <div id="map" class="location-map"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <div class="footer-logo">TERROIR.</div>
+                <p class="footer-tagline">Crafted Specialty Coffee & Roastery</p>
+            </div>
+            <div class="footer-center">
+                <p class="footer-copy">&copy; 2026 Terroir Coffee Roasters. <span data-i18n="footer_rights">All rights
+                        reserved.</span></p>
+            </div>
+            <div class="footer-right">
+                <button id="openAdminBtn" class="admin-access-btn" title="Open Admin Control">
+                    <span class="admin-lock-icon">🔒</span>
+                    <span data-i18n="admin_access">Admin Access</span>
+                </button>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-sidebar-header">
+            <h2 data-i18n="cart_sidebar_title">Your Bag</h2>
+            <div class="cart-header-actions">
+                <button class="clear-cart-btn" id="clear-cart-btn" data-i18n="cart_clear_btn">Clear All</button>
+                <button class="close-cart-btn" id="close-cart-btn">&times;</button>
+            </div>
+        </div>
+
+        <div class="cart-sidebar-items" id="cart-sidebar-items">
+            <p class="empty-cart-msg" data-i18n="cart_empty">Your bag is empty.</p>
+        </div>
+
+        <div class="cart-sidebar-footer">
+            <div class="cart-total">
+                <span data-i18n="cart_total_label">Total:</span>
+                <span id="cart-total-price">€0.00</span>
+            </div>
+            <button class="btn btn-primary checkout-btn" data-i18n="cart_checkout">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <div class="cart-overlay" id="cart-overlay"></div>
+
+    <!-- Admin Auth Modal -->
+    <div class="admin-modal-overlay" id="adminAuthModal">
+        <div class="admin-modal-box">
+            <button class="admin-modal-close" id="closeAdminAuthBtn" aria-label="Close">&times;</button>
+            <div class="admin-auth-header">
+                <div class="admin-badge-icon">🔐</div>
+                <h2 class="admin-modal-title" data-i18n="admin_login_title">Admin Portal</h2>
+                <p class="admin-subtitle" data-i18n="admin_login_desc">Enter passkey to manage coffee catalog</p>
+            </div>
+            <form id="adminAuthForm" class="admin-auth-form" autocomplete="off">
+                <div class="admin-form-group">
+                    <input type="password" id="adminPasswordInput" class="admin-input" placeholder="Enter password..."
+                        required autocomplete="off">
+                </div>
+                <div class="admin-demo-tag" data-i18n="admin_demo_hint">Demo password: 1234</div>
+                <div class="admin-error-msg" id="adminAuthError" style="display: none;" data-i18n="admin_error_pwd">
+                    Invalid passkey. Access denied.
+                </div>
+                <button type="submit" class="btn btn-primary admin-btn-submit" data-i18n="admin_btn_login">Unlock
+                    Dashboard</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Admin Dashboard Modal -->
+    <div class="admin-modal-overlay" id="adminDashboardModal">
+        <div class="admin-dashboard-container">
+            <div class="admin-dash-header">
+                <div class="admin-dash-title-group">
+                    <span class="admin-status-dot"></span>
+                    <h2 class="admin-dash-title" data-i18n="admin_dash_title">Catalog Management</h2>
+                </div>
+                <div class="admin-dash-actions">
+                    <button class="btn btn-secondary admin-btn-sm" id="adminLogoutBtn" data-i18n="admin_logout">Exit
+                        Admin</button>
+                    <button class="admin-modal-close" id="closeAdminDashBtn" aria-label="Close">&times;</button>
+                </div>
+            </div>
+
+            <div class="admin-dash-body">
+                <!-- Add Product Section -->
+                <div class="admin-card add-product-card">
+                    <h3 class="admin-card-title">
+                        <span class="card-icon">➕</span>
+                        <span data-i18n="admin_add_title">Add New Coffee</span>
+                    </h3>
+                    <form id="addProductForm" class="admin-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="prodTitle" data-i18n="admin_label_title">Title / Origin</label>
+                                <input type="text" id="prodTitle" class="admin-input" placeholder="e.g. Panama Geisha"
+                                    required>
+                            </div>
+                            <div class="form-group">
+                                <label for="prodPrice" data-i18n="admin_label_price">Price (€)</label>
+                                <input type="number" id="prodPrice" class="admin-input" placeholder="18.50" step="0.10"
+                                    min="1" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="prodNotes" data-i18n="admin_label_notes">Tasting Notes / Description</label>
+                            <input type="text" id="prodNotes" class="admin-input"
+                                placeholder="Notes: Jasmine, Peach, Bergamot" required>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group flex-2">
+                                <label for="prodImage" data-i18n="admin_label_image">Image URL (Unsplash)</label>
+                                <input type="url" id="prodImage" class="admin-input"
+                                    placeholder="https://images.unsplash.com/..." required>
+                            </div>
+                            <div class="form-group flex-1">
+                                <label for="prodBadge" data-i18n="admin_label_badge">Badge Tag</label>
+                                <select id="prodBadge" class="admin-input admin-select">
+                                    <option value="" data-i18n="admin_badge_none">No Badge</option>
+                                    <option value="SPECIAL">SPECIAL</option>
+                                    <option value="NEW">NEW</option>
+                                    <option value="TOP">TOP</option>
+                                    <option value="BESTSELLER">BESTSELLER</option>
+                                    <option value="SINGLE ORIGIN">SINGLE ORIGIN</option>
+                                    <option value="SIGNATURE">SIGNATURE</option>
+                                    <option value="LIMITED">LIMITED</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary admin-btn-add" data-i18n="admin_btn_add">Add to
+                            Catalog</button>
+                    </form>
+                </div>
+
+                <!-- Current Catalog List Section -->
+                <div class="admin-card manage-products-card">
+                    <div class="admin-card-header-flex">
+                        <h3 class="admin-card-title">
+                            <span class="card-icon">☕</span>
+                            <span data-i18n="admin_products_title">Current Active Catalog</span>
+                        </h3>
+                        <span class="products-count-badge" id="adminProductsCount">6 items</span>
+                    </div>
+                    <div class="admin-products-list" id="adminProductsList">
+                        <!-- Dynamic admin product rows -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick View Product Modal -->
+    <div class="quick-view-overlay" id="quickViewOverlay" role="dialog" aria-modal="true" aria-labelledby="qvTitle">
+        <div class="quick-view-modal" id="quickViewModal">
+            <button type="button" class="qv-close-btn" id="qvCloseBtn" aria-label="Close">&times;</button>
+            <div class="qv-image-panel">
+                <img id="qvImage" src="" alt="" loading="lazy">
+                <span class="qv-badge" id="qvBadge"></span>
+            </div>
+            <div class="qv-content-panel">
+                <div class="qv-meta">
+                    <h2 class="qv-title" id="qvTitle"></h2>
+                    <span class="qv-price" id="qvPrice"></span>
+                </div>
+                <p class="qv-notes" id="qvNotes"></p>
+                <hr class="qv-divider">
+                <span class="qv-story-label" data-i18n="qv_full_story">Full Story</span>
+                <p id="qv-story-text" class="qv-story-text"
+                    style="color: #ccc; font-size: 14px; line-height: 1.6; margin-top: 10px;"></p>
+                <div class="qv-actions">
+                    <div class="qv-qty-row">
+                        <span class="qv-qty-label" data-i18n="qv_qty">Qty</span>
+                        <div class="qv-qty-control">
+                            <button type="button" class="qv-qty-btn" id="qvQtyMinus"
+                                aria-label="Decrease quantity">&#8722;</button>
+                            <span class="qv-qty-value" id="qvQtyValue">1</span>
+                            <button type="button" class="qv-qty-btn" id="qvQtyPlus"
+                                aria-label="Increase quantity">&#43;</button>
+                        </div>
+                    </div>
+                    <button type="button" class="qv-add-btn" id="qvAddBtn" data-i18n="btn_add_to_bag">Add to
+                        Bag</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+
+</body>
+
+</html>
