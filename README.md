@@ -4,6 +4,8 @@
 
 A storefront concept for a specialty coffee shop. I wanted the site to feel like opening a café menu and browsing the shelves in the same visit.
 
+[Open the live demo](https://terroir-coffee-portfolio.vercel.app/)
+
 Explore the café menu, filter the bean catalog, open a product card or try the taste quiz. The demo also includes a shopping bag and a local catalog editor. The interface is available in English, Spanish and Ukrainian.
 
 [View a screenshot of the storefront](docs/desktop.jpg)
