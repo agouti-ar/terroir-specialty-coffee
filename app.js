@@ -221,7 +221,7 @@ function showQuizResult() {
     const matchedCoffee = coffeeDatabase[resultKey];
     if (!matchedCoffee) return;
 
-    const currentLang = localStorage.getItem('user_lang') || 'en';
+    const currentLang = activeLanguage;
     const resultTitle = document.getElementById('result-title');
     const resultDesc = document.getElementById('result-description');
     const quizResult = document.getElementById('quiz-result');
@@ -243,7 +243,7 @@ function renderShopCatalog() {
     const shopGrid = document.getElementById('shop-grid');
     if (!shopGrid) return;
 
-    const currentLang = localStorage.getItem('user_lang') || 'en';
+    const currentLang = activeLanguage;
     const langDict = dictionary[currentLang] || dictionary.en;
     const allProducts = getStoredProducts();
 
@@ -411,7 +411,7 @@ function openQuickView(product) {
     quickViewProduct = product;
     quickViewQty = 1;
 
-    const currentLang = localStorage.getItem('user_lang') || 'en';
+    const currentLang = activeLanguage;
     const langDict = dictionary[currentLang] || dictionary.en;
 
     const defaultProd = DEFAULT_PRODUCTS.find(p => p.id === product.id);
@@ -525,7 +525,7 @@ function initQuickView() {
             if (!quickViewProduct) return;
             addProductToCart(quickViewProduct, quickViewQty, null);
 
-            const currentLang = localStorage.getItem('user_lang') || 'en';
+            const currentLang = activeLanguage;
             const langDict = dictionary[currentLang] || dictionary.en;
 
             addBtnEl.textContent = langDict.btn_added || 'Added!';
@@ -555,7 +555,7 @@ function updateCartCount() {
 }
 
 function addProductToCart(product, quantity = 1, buttonElement = null) {
-    const currentLang = localStorage.getItem('user_lang') || 'en';
+    const currentLang = activeLanguage;
     const langDict = dictionary[currentLang] || dictionary.en;
 
     const title = (product.titleKey && langDict[product.titleKey]) ? langDict[product.titleKey] : product.title;
@@ -587,7 +587,7 @@ function addProductToCart(product, quantity = 1, buttonElement = null) {
         buttonElement.classList.add('added');
 
         setTimeout(() => {
-            const currentLangNow = localStorage.getItem('user_lang') || 'en';
+            const currentLangNow = activeLanguage;
             const dictNow = dictionary[currentLangNow] || dictionary.en;
             buttonElement.innerText = dictNow.btn_add_to_bag || originalText;
             buttonElement.classList.remove('added');
@@ -601,7 +601,7 @@ function updateCartUI() {
     if (!cartSidebarItems) return;
 
     cartSidebarItems.innerHTML = '';
-    const currentLang = localStorage.getItem('user_lang') || 'en';
+    const currentLang = activeLanguage;
     const langDict = dictionary[currentLang] || dictionary.en;
     const emptyMsg = langDict.cart_empty || "Your bag is empty.";
 
@@ -745,7 +745,7 @@ function initPromoCopy() {
     copyBtn.addEventListener('click', () => {
         const code = copyBtn.getAttribute('data-code') || 'ANDY10';
         navigator.clipboard.writeText(code).then(() => {
-            const currentLang = localStorage.getItem('user_lang') || 'en';
+            const currentLang = activeLanguage;
             const langDict = dictionary[currentLang] || dictionary.en;
 
             copyBtn.classList.add('copied');
@@ -888,7 +888,7 @@ function renderAdminProductsList() {
     if (!listEl) return;
 
     const products = getStoredProducts();
-    const currentLang = localStorage.getItem('user_lang') || 'en';
+    const currentLang = activeLanguage;
     const langDict = dictionary[currentLang] || dictionary.en;
 
     listEl.innerHTML = '';
@@ -933,12 +933,17 @@ function renderAdminProductsList() {
 // ==========================================
 // 8. i18n DICTIONARY
 // ==========================================
+let activeLanguage = 'en';
+
 const dictionary = {
     en: {
+        loc_demo_contact: "Demo contact",
+        map_title: "Map of central Madrid",
+        map_open: "Open Madrid in OpenStreetMap",
         nav_menu: "MENU",
         nav_shop: "SHOP",
         nav_story: "STORY",
-        nav_barista: "AI BARISTA",
+        nav_barista: "COFFEE FINDER",
         nav_reviews: "REVIEWS",
         nav_location: "LOCATION",
 
@@ -1006,17 +1011,17 @@ const dictionary = {
         story_subtitle: "Our Inspiration & Story",
         story_title: "Crafted with Soul, Dedicated to Andy",
         story_desc: "Crafted under the impression of Spanish streets and dedicated to our muse Andy from Madrid. A blend created for those who need warmth, care, and flawless coffee on every shift.",
-        story_banner_title: "Exclusive Tasting Gift",
+        story_banner_title: "Demo Tasting Offer",
         story_banner_text: "Use code ANDY10 for 10% off your first bag",
         story_copy_code: "Copy Code",
         story_code_copied: "Copied!",
         story_signature: "~ Dedicated to Andy, Madrid ~",
-        story_badge: "Crafted with Love & Specialty Grain",
+        story_badge: "A small tribute, roasted with care",
 
         // AI Barista Quiz Section
-        ai_subtitle: "Intelligent Selection",
+        ai_subtitle: "Coffee Finder",
         ai_title: "Find Your Perfect Match",
-        ai_desc: "Answer a few questions about your taste preferences, and our trained AI Concierge will select the ideal single-origin bean for your morning ritual.",
+        ai_desc: "Choose your roast and brewing method to find a coffee from the collection.",
         quiz_q1: "1. What's your preferred roast profile?",
         quiz_opt_light: "Light & Fruity (Bright acidity)",
         quiz_opt_dark: "Dark & Chocolatey (Rich, bold)",
@@ -1034,7 +1039,7 @@ const dictionary = {
         review1_text: `"The Ethiopia Yirgacheffe brewed on V60 here is mind-blowing. Subtle jasmine notes and incredible clarity. Terroir is my daily ritual!"`,
         review2_name: "Marcus Vance",
         review2_role: "Architect & Designer",
-        review2_text: `"Atmosphere, design, and consistency. The AI Barista recommended Colombia El Paraiso, and it matched my taste profile perfectly."`,
+        review2_text: "“The coffee finder recommended Colombia El Paraiso, which matched my taste.”",
         review3_name: "Sophia Martinez",
         review3_role: "Food & Travel Critic",
         review3_text: `"Smoked Caramel Latte is hands down the best signature drink in town. Fast delivery of fresh whole bean coffee right to my doorstep."`,
@@ -1042,13 +1047,13 @@ const dictionary = {
         // Location Section
         location_subtitle: "Visit Our House",
         location_title: "Location & Hours",
-        loc_address_title: "Address",
-        loc_address_val: "74 Grand Avenue, Coffee Quarter",
-        loc_address_hint: "Corner of 4th Street",
-        loc_hours_title: "Opening Hours",
+        loc_address_title: "Inspiration",
+        loc_address_val: "Madrid, Spain",
+        loc_address_hint: "Setting for this fictional café",
+        loc_hours_title: "Sample Opening Hours",
         loc_hours_val: "Mon - Fri: 07:30 AM - 08:00 PM",
         loc_hours_weekend: "Sat - Sun: 08:30 AM - 09:00 PM",
-        loc_contact_title: "Contact & Bookings",
+        loc_contact_title: "Contact Example",
 
         // Cart Sidebar
         cart_sidebar_title: "Your Bag",
@@ -1063,10 +1068,13 @@ const dictionary = {
         footer_rights: "All rights reserved."
     },
     es: {
+        loc_demo_contact: "Contacto de demostración",
+        map_title: "Mapa del centro de Madrid",
+        map_open: "Ver Madrid en OpenStreetMap",
         nav_menu: "MENÚ",
         nav_shop: "TIENDA",
         nav_story: "HISTORIA",
-        nav_barista: "BARISTA IA",
+        nav_barista: "BUSCADOR DE CAFÉ",
         nav_reviews: "OPINIONES",
         nav_location: "UBICACIÓN",
 
@@ -1134,17 +1142,17 @@ const dictionary = {
         story_subtitle: "Nuestra Inspiración e Historia",
         story_title: "Elaborado con Alma, Dedicado a Andy",
         story_desc: "Elaborado bajo la impresión de las calles españolas y dedicado a nuestra musa Andy de Madrid. Una mezcla creada para quienes necesitan calidez, cuidado y un café impecable en cada turno.",
-        story_banner_title: "Regalo Exclusivo de Cata",
+        story_banner_title: "Oferta de degustación de muestra",
         story_banner_text: "Usa el código ANDY10 para un 10% de descuento en tu primera bolsa",
         story_copy_code: "Copiar Código",
         story_code_copied: "¡Copiado!",
         story_signature: "~ Dedicado a Andy, Madrid ~",
-        story_badge: "Elaborado con Amor y Grano de Especialidad",
+        story_badge: "Un pequeño homenaje, tostado con cuidado",
 
         // AI Barista Quiz Section
-        ai_subtitle: "Selección Inteligente",
+        ai_subtitle: "Buscador de café",
         ai_title: "Encuentra tu Café Ideal",
-        ai_desc: "Responde unas preguntas sobre tus gustos y nuestro Asistente IA seleccionará el grano ideal para tu ritual matutino.",
+        ai_desc: "Elige el tueste y el método de preparación para encontrar un café de la colección.",
         quiz_q1: "1. ¿Cuál es tu perfil de tueste preferido?",
         quiz_opt_light: "Claro y Frutal (Acidez brillante)",
         quiz_opt_dark: "Oscuro y Enchocolatado (Rico, intenso)",
@@ -1162,7 +1170,7 @@ const dictionary = {
         review1_text: `"El Etiopía Yirgacheffe preparado en V60 aquí es alucinante. Sutiles notas de jazmín y una claridad increíble. ¡Terroir es mi ritual diario!"`,
         review2_name: "Marcus Vance",
         review2_role: "Arquitecto y Diseñador",
-        review2_text: `"Atmósfera, diseño y consistencia. El Barista IA me recomendó Colombia El Paraíso y coincidió perfectamente con mis gustos."`,
+        review2_text: "«El buscador de café me recomendó Colombia El Paraiso, justo lo que buscaba».",
         review3_name: "Sophia Martinez",
         review3_role: "Crítica de Gastronomía y Viajes",
         review3_text: `"El Latte de Caramelo Ahumado es sin duda la mejor bebida de autor de la ciudad. Entrega rápida de granos frescos a mi puerta."`,
@@ -1170,13 +1178,13 @@ const dictionary = {
         // Location Section
         location_subtitle: "Visita Nuestra Cafetería",
         location_title: "Ubicación y Horarios",
-        loc_address_title: "Dirección",
-        loc_address_val: "74 Grand Avenue, Barrio del Café",
-        loc_address_hint: "Esquina con la Calle 4",
-        loc_hours_title: "Horarios de Apertura",
+        loc_address_title: "Inspiración",
+        loc_address_val: "Madrid, España",
+        loc_address_hint: "Escenario de esta cafetería ficticia",
+        loc_hours_title: "Ejemplo de horario",
         loc_hours_val: "Lun - Vie: 07:30 AM - 08:00 PM",
         loc_hours_weekend: "Sáb - Dom: 08:30 AM - 09:00 PM",
-        loc_contact_title: "Contacto y Reservas",
+        loc_contact_title: "Ejemplo de contacto",
 
         // Cart Sidebar
         cart_sidebar_title: "Tu Bolsa",
@@ -1191,10 +1199,13 @@ const dictionary = {
         footer_rights: "Todos los derechos reservados."
     },
     ua: {
+        loc_demo_contact: "Демонстраційний контакт",
+        map_title: "Карта центру Мадрида",
+        map_open: "Відкрити Мадрид в OpenStreetMap",
         nav_menu: "МЕНЮ",
         nav_shop: "МАГАЗИН",
         nav_story: "ІСТОРІЯ",
-        nav_barista: "AI БАРИСТА",
+        nav_barista: "ПІДБІР КАВИ",
         nav_reviews: "ВІДГУКИ",
         nav_location: "ЛОКАЦІЯ",
 
@@ -1262,17 +1273,17 @@ const dictionary = {
         story_subtitle: "Наша Історія та Натхнення",
         story_title: "Створено з Душею, Присвячено Енді",
         story_desc: "Створено під враженням іспанських вуличок та присвячено нашій музі Енді з Мадрида. Бленд, створений для тих, кому потрібні тепло, турбота та бездоганна кава на кожній зміні.",
-        story_banner_title: "Ексклюзивний Подарунок",
+        story_banner_title: "Демонстраційна пропозиція",
         story_banner_text: "Використовуйте промокод ANDY10 для знижки 10% на першу пачку",
         story_copy_code: "Скопіювати код",
         story_code_copied: "Скопійовано!",
         story_signature: "~ Присвячено Енді, Мадрид ~",
-        story_badge: "Створено з Любов'ю та Спешелті Зерном",
+        story_badge: "Невелика присвята, обсмажена з турботою",
 
         // AI Barista Quiz Section
-        ai_subtitle: "Інтелектуальний підбір",
+        ai_subtitle: "Підбір кави",
         ai_title: "Знайдіть свій ідеальний каву",
-        ai_desc: "Дайте відповідь на кілька запитань про свої вподобання, і наш ШІ-сомельє підбере ідеальну каву для вашого ранкового ритуалу.",
+        ai_desc: "Оберіть обсмаження та спосіб заварювання, щоб знайти каву з нашої добірки.",
         quiz_q1: "1. Який профіль обсмаження ви віддаєте перевагу?",
         quiz_opt_light: "Світле та Фруктове (Яскрава кислинка)",
         quiz_opt_dark: "Темне та Шоколадне (Насичене, міцне)",
@@ -1290,7 +1301,7 @@ const dictionary = {
         review1_text: `"Ефіопія Іргачеф, заварена на V60 тут — це щось неймовірне. Витончені ноти жасмину та виняткова чистота смаку. Terroir — мій щоденний ритуал!"`,
         review2_name: "Маркус Вейнс",
         review2_role: "Архітектор та Дизайнер",
-        review2_text: `"Атмосфера, дизайн та стабільна якість. ШІ-Бариста порадив Колумбію Ель Параїсо — і це на 100% влучило в мій смаковий профіль."`,
+        review2_text: "«Підбір кави запропонував Colombia El Paraiso, і вона припала мені до смаку».",
         review3_name: "Софія Мартінес",
         review3_role: "Гастрономічний та Тревел-Критик",
         review3_text: `"Копчений Карамельний Латте — безперечно найкращий авторський напій у місті. Швидка доставка свіжої зернової кави прямо до моїх дверей."`,
@@ -1298,13 +1309,13 @@ const dictionary = {
         // Location Section
         location_subtitle: "Завітайте до Нас",
         location_title: "Локація та Години Роботи",
-        loc_address_title: "Адреса",
-        loc_address_val: "74 Гранд Авеню, Кавовий Квартал",
-        loc_address_hint: "Ріг 4-ї вулиці",
-        loc_hours_title: "Години Роботи",
+        loc_address_title: "Натхнення",
+        loc_address_val: "Мадрид, Іспанія",
+        loc_address_hint: "Місце дії цієї вигаданої кав’ярні",
+        loc_hours_title: "Приклад графіка роботи",
         loc_hours_val: "Пн - Пт: 07:30 AM - 08:00 PM",
         loc_hours_weekend: "Сб - Нд: 08:30 AM - 09:00 PM",
-        loc_contact_title: "Контакти та Бронювання",
+        loc_contact_title: "Приклад контакту",
 
         // Cart Sidebar
         cart_sidebar_title: "Ваш Кошик",
@@ -1323,7 +1334,35 @@ const dictionary = {
 // ==========================================
 // 9. LANGUAGE CONTROLLER
 // ==========================================
-function setLanguage(lang) {
+dictionary.de = { ...dictionary.en, ...germanCopy };
+
+const languagePreferenceKey = 'terroir-preferred-language';
+
+function detectLanguage() {
+    const requested = new URLSearchParams(location.search).get('lang');
+    if (requested && Object.hasOwn(dictionary, requested === 'uk' ? 'ua' : requested)) {
+        return requested === 'uk' ? 'ua' : requested;
+    }
+    try {
+        const saved = localStorage.getItem(languagePreferenceKey);
+        if (saved && Object.hasOwn(dictionary, saved)) return saved;
+    } catch {
+        // The site can still follow browser preferences without storage.
+    }
+    for (const language of navigator.languages) {
+        const base = language.toLowerCase().split('-')[0];
+        const locale = base === 'uk' ? 'ua' : base;
+        if (Object.hasOwn(dictionary, locale)) return locale;
+    }
+    return 'en';
+}
+
+function setLanguage(lang, remember = false) {
+    activeLanguage = lang;
+    document.documentElement.lang = lang === 'ua' ? 'uk' : lang;
+    document.querySelectorAll('[data-i18n-title]').forEach(element => {
+        element.title = dictionary[lang][element.dataset.i18nTitle];
+    });
     if (!dictionary[lang]) return;
 
     const i18nElements = document.querySelectorAll('[data-i18n]');
@@ -1347,9 +1386,10 @@ function setLanguage(lang) {
         currentLangLabel.textContent = lang.toUpperCase();
     }
 
-    const langDropdownItems = document.querySelectorAll('.lang-dropdown li');
+    const langDropdownItems = document.querySelectorAll('.lang-dropdown button');
     langDropdownItems.forEach(opt => {
         const optLang = opt.getAttribute('data-lang');
+        opt.setAttribute('aria-current', optLang === lang ? 'true' : 'false');
         if (optLang === lang) {
             opt.classList.add('active');
         } else {
@@ -1358,7 +1398,7 @@ function setLanguage(lang) {
     });
 
     try {
-        localStorage.setItem('user_lang', lang);
+        if (remember) localStorage.setItem(languagePreferenceKey, lang);
     } catch (e) {
         console.warn('LocalStorage error:', e);
     }
@@ -1385,78 +1425,35 @@ function setLanguage(lang) {
     }
 
     // Update cart empty state if empty
-    if (cart.length === 0) {
-        updateCartUI();
-    }
+    updateCartUI();
 }
 
 function initLanguageDropdown() {
-    const langWrapper = document.querySelector('.lang-select-wrapper');
-    const langBtn = document.getElementById('langBtn');
-    const langDropdownItems = document.querySelectorAll('.lang-dropdown li');
+    const wrapper = document.querySelector('.lang-select-wrapper');
+    const trigger = document.getElementById('langBtn');
 
-    if (langBtn && langWrapper) {
-        langBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            langWrapper.classList.toggle('open');
-        });
+    function setOpen(open) {
+        wrapper.classList.toggle('open', open);
+        trigger.setAttribute('aria-expanded', String(open));
     }
 
-    if (langWrapper) {
-        document.addEventListener('click', () => {
-            langWrapper.classList.remove('open');
-        });
-    }
-
-    langDropdownItems.forEach(opt => {
-        opt.addEventListener('click', (e) => {
-            e.stopPropagation();
-            const selectedLang = opt.getAttribute('data-lang');
-            if (selectedLang) {
-                setLanguage(selectedLang);
-            }
-            if (langWrapper) {
-                langWrapper.classList.remove('open');
-            }
+    trigger.addEventListener('click', () => setOpen(!wrapper.classList.contains('open')));
+    document.addEventListener('click', event => {
+        if (!wrapper.contains(event.target)) setOpen(false);
+    });
+    wrapper.addEventListener('keydown', event => {
+        if (event.key === 'Escape' && wrapper.classList.contains('open')) {
+            setOpen(false);
+            trigger.focus();
+        }
+    });
+    wrapper.querySelectorAll('[data-lang]').forEach(option => {
+        option.addEventListener('click', () => {
+            setLanguage(option.dataset.lang, true);
+            setOpen(false);
+            trigger.focus();
         });
     });
-}
-
-// ==========================================
-// 10. LEAFLET DARK MAP INITIALIZATION
-// ==========================================
-function initLeafletMap() {
-    const mapElement = document.getElementById('map');
-    if (mapElement && typeof L !== 'undefined') {
-        try {
-            const map = L.map('map', {
-                center: [40.7128, -74.0060],
-                zoom: 14,
-                zoomControl: false
-            });
-
-            L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
-                subdomains: 'abcd',
-                maxZoom: 19
-            }).addTo(map);
-
-            const goldIcon = L.divIcon({
-                className: 'custom-map-pin',
-                html: `<div class="map-pin-inner"><span>📍</span><div class="map-pin-pulse"></div></div>`,
-                iconSize: [40, 40],
-                iconAnchor: [20, 40]
-            });
-
-            L.marker([40.7128, -74.0060], { icon: goldIcon })
-                .addTo(map)
-                .bindPopup(`<b>TERROIR COFFEE</b><br>74 Grand Avenue, Coffee Quarter`, {
-                    className: 'dark-map-popup'
-                });
-        } catch (err) {
-            console.warn('Map initialization error:', err);
-        }
-    }
 }
 
 // ==========================================
@@ -1517,10 +1514,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 8. Initialize Language dropdown & apply saved language
     initLanguageDropdown();
-    const savedLang = localStorage.getItem('user_lang') || 'en';
-    setLanguage(savedLang);
+    setLanguage(detectLanguage());
 
-    // 9. Initialize Dark Map & Scroll Reveal
-    initLeafletMap();
     initScrollReveal();
 });

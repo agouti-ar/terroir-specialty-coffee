@@ -197,6 +197,38 @@ a {
     /* Делаем красивый радиальный градиент: в центре чуть светлее, к краям темнее */
     background: radial-gradient(circle at 80% 50%, #1a1512 0%, #0b0a0a 100%);
     position: relative;
+    isolation: isolate;
+}
+
+.hero-photo,
+.hero::after {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.hero-photo {
+    object-fit: cover;
+    object-position: right center;
+    z-index: -2;
+}
+
+.hero::after {
+    content: "";
+    background: linear-gradient(90deg, #090707e8 0%, #090707ad 43%, transparent 75%);
+    z-index: -1;
+}
+
+@media (max-width: 680px) {
+    .hero {
+        min-height: max(680px, 100svh);
+        align-items: flex-end;
+        padding-block: 9rem 3rem;
+    }
+    .hero-photo { object-position: 75% top; }
+    .hero::after { background: linear-gradient(0deg, #090707 5%, #090707d9 35%, transparent 78%); }
+    .hero .hero-content { margin-top: 0; }
 }
 
 .hero-content {
@@ -886,13 +918,21 @@ a {
 }
 
 .story-signature {
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    font-size: 19px;
-    color: #d4af37;
-    letter-spacing: 1px;
-    opacity: 0.92;
-    text-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+    display: inline-block;
+    padding: .12em .22em;
+    font: 400 clamp(2.5rem, 6vw, 3.6rem)/1.15 'Alex Brush', cursive;
+    color: #f1c96a;
+    text-shadow: 0 0 .35em #f5a63d66;
+}
+
+.story-signature-wrapper.revealed .story-signature {
+    animation: sign-dedication 1.35s .12s ease-out both;
+}
+
+@keyframes sign-dedication {
+    0% { clip-path: inset(0 100% 0 0); text-shadow: 0 0 .55em #ffb34099; }
+    80% { clip-path: inset(0 0 0 0); text-shadow: 0 0 .25em #ffd389aa; }
+    100% { clip-path: inset(0 0 0 0); }
 }
 
 /* ── Brand Signature Badge in Story Section ── */
@@ -900,9 +940,8 @@ a {
     font-family: 'Playfair Display', serif;
     font-style: italic;
     font-size: 16px;
-    color: #D4AF37;
-    letter-spacing: 2px;
-    opacity: 0.85;
+    color: #dccbab;
+    letter-spacing: .04em;
     text-align: center;
     margin-top: 4px;
     filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.3));
@@ -1611,20 +1650,34 @@ a {
     list-style: none;
     padding: 4px 0;
     margin: 0;
-    min-width: 70px;
-    display: none;
+    min-width: 122px;
+    display: block;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-5px);
+    transition: opacity .18s ease, transform .18s ease, visibility .18s;
+    pointer-events: none;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
     z-index: 100;
 }
 
 .lang-select-wrapper.open .lang-dropdown {
-    display: block;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
 }
 
 .lang-option {
+    display: block;
+    width: 100%;
+    min-height: 40px;
+    border: 0;
+    background: transparent;
+    font-family: inherit;
     padding: 6px 14px;
     font-size: 12px;
-    color: #888;
+    color: #d9cdb4;
     cursor: pointer;
     text-align: center;
     transition: color 0.2s ease, background 0.2s ease;
@@ -1634,6 +1687,23 @@ a {
 .lang-option.active {
     color: #d4af37;
     background: rgba(212, 175, 55, 0.05);
+}
+
+.map-link {
+    display: block;
+    padding: .75rem 1rem;
+    color: #ead29b;
+    font-size: .85rem;
+    text-decoration: underline;
+    text-underline-offset: .2em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .reveal-on-scroll { opacity: 1 !important; transform: none !important; transition: none !important; }
+    .story-signature-wrapper.revealed .story-signature,
+    .brand-signature-badge { animation: none; }
+    .lang-dropdown { transition: none; }
 }
 
 /* 8. БЛОК ОТЗЫВОВ ГОСТЕЙ (TESTIMONIALS SECTION) */
@@ -1784,9 +1854,11 @@ a {
 }
 
 .location-map {
+    display: block;
     width: 100%;
     height: 100%;
     min-height: 380px;
+    border: 0;
     background-color: #0b0a0a;
 }
 
