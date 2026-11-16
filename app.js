@@ -11,12 +11,12 @@ const DEFAULT_PRODUCTS = [
         title: "Andy's Special Roast #25",
         titleKey: 'shop_item_andy_title',
         price: 18.90,
-        notes: 'Notes: Red Orange, Milk Chocolate, Sweet Caramel',
+        notes: 'Blood orange · milk chocolate · caramel',
         notesKey: 'notes_andy',
         storyKey: 'story_andy',
         badge: 'SPECIAL',
         badgeKey: 'badge_special',
-        image: 'https://images.unsplash.com/photo-1559056199-641a0ac8b55e?auto=format&fit=crop&w=800&q=80',
+        image: 'assets/coffee/andy.jpg',
         isSpecial: true,
         category: 'special'
     },
@@ -25,12 +25,12 @@ const DEFAULT_PRODUCTS = [
         title: 'Ethiopia Yirgacheffe',
         titleKey: 'shop_item1_title',
         price: 14.50,
-        notes: 'Notes: Jasmine, Bergamot, Black Tea',
+        notes: 'Jasmine · bergamot · black tea',
         notesKey: 'notes_ethiopia',
         storyKey: 'story_ethiopia',
         badge: 'Best Seller',
         badgeKey: 'badge_bestseller',
-        image: 'https://images.unsplash.com/photo-1587734195503-904fca47e0e9?auto=format&fit=crop&w=800&q=80',
+        image: 'assets/coffee/ethiopia.jpg',
         category: 'bestseller'
     },
     {
@@ -38,12 +38,12 @@ const DEFAULT_PRODUCTS = [
         title: 'Colombia El Paraiso',
         titleKey: 'shop_item2_title',
         price: 16.80,
-        notes: 'Notes: Strawberry, White Chocolate, Yogurt',
+        notes: 'Strawberry · white chocolate · yogurt',
         notesKey: 'notes_colombia',
         storyKey: 'story_colombia',
         badge: 'New',
         badgeKey: 'badge_new',
-        image: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=800&q=80',
+        image: 'assets/coffee/colombia.jpg',
         category: 'new'
     },
     {
@@ -51,12 +51,12 @@ const DEFAULT_PRODUCTS = [
         title: 'Guatemala Huehuetenango',
         titleKey: 'shop_item3_title',
         price: 15.20,
-        notes: 'Notes: Red Apple, Milk Chocolate, Hazelnut',
+        notes: 'Red apple · milk chocolate · hazelnut',
         notesKey: 'notes_guatemala',
         storyKey: 'story_guatemala',
         badge: 'Single Origin',
         badgeKey: 'badge_single_origin',
-        image: 'https://images.unsplash.com/photo-1611854779393-1b2da9d400fe?auto=format&fit=crop&w=800&q=80',
+        image: 'assets/coffee/guatemala.jpg',
         category: 'single_origin'
     },
     {
@@ -64,12 +64,12 @@ const DEFAULT_PRODUCTS = [
         title: 'Brazil Cerrado Mineiro',
         titleKey: 'shop_item4_title',
         price: 13.90,
-        notes: 'Notes: Dark Chocolate, Toasted Almond, Caramel',
+        notes: 'Dark chocolate · toasted almond · caramel',
         notesKey: 'notes_brazil',
         storyKey: 'story_brazil',
         badge: 'Signature',
         badgeKey: 'badge_signature',
-        image: 'https://images.unsplash.com/photo-1589396575653-c09c794ff6a6?auto=format&fit=crop&w=800&q=80',
+        image: 'assets/coffee/brazil.jpg',
         category: 'bestseller'
     },
     {
@@ -77,15 +77,24 @@ const DEFAULT_PRODUCTS = [
         title: 'Costa Rica Tarrazu',
         titleKey: 'shop_item6_title',
         price: 15.80,
-        notes: 'Notes: Honey, Orange Blossom, Milk Chocolate',
+        notes: 'Honey · orange blossom · milk chocolate',
         notesKey: 'notes_costa_rica',
         storyKey: 'story_costa_rica',
         badge: 'Single Origin',
         badgeKey: 'badge_single_origin',
-        image: 'https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=800&q=80',
+        image: 'assets/coffee/costa-rica.jpg',
         category: 'single_origin'
     }
 ];
+
+const LEGACY_PRODUCT_IMAGES = {
+    'prod-special-andy': 'https://images.unsplash.com/photo-1559056199-641a0ac8b55e?auto=format&fit=crop&w=800&q=80',
+    'prod-1': 'https://images.unsplash.com/photo-1587734195503-904fca47e0e9?auto=format&fit=crop&w=800&q=80',
+    'prod-2': 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=800&q=80',
+    'prod-3': 'https://images.unsplash.com/photo-1611854779393-1b2da9d400fe?auto=format&fit=crop&w=800&q=80',
+    'prod-4': 'https://images.unsplash.com/photo-1589396575653-c09c794ff6a6?auto=format&fit=crop&w=800&q=80',
+    'prod-6': 'https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=800&q=80'
+};
 
 const PRODUCTS_STORAGE_VERSION = 'v4_full_story_catalog';
 
@@ -96,7 +105,16 @@ function getStoredProducts() {
         if (stored && version === PRODUCTS_STORAGE_VERSION) {
             const parsed = JSON.parse(stored);
             if (Array.isArray(parsed) && parsed.length > 0) {
-                return parsed;
+                const migrated = parsed.map(product => {
+                    const originalImage = LEGACY_PRODUCT_IMAGES[product.id];
+                    if (!originalImage || product.image !== originalImage) return product;
+                    const defaultProduct = DEFAULT_PRODUCTS.find(item => item.id === product.id);
+                    return { ...product, image: defaultProduct.image };
+                });
+                if (migrated.some((product, index) => product !== parsed[index])) {
+                    saveStoredProducts(migrated);
+                }
+                return migrated;
             }
         }
     } catch (e) {
@@ -963,12 +981,12 @@ const dictionary = {
         shop_item3_title: "Guatemala Huehuetenango",
         shop_item4_title: "Brazil Cerrado Mineiro",
         shop_item6_title: "Costa Rica Tarrazu",
-        notes_andy: "Notes: Red Orange, Milk Chocolate, Sweet Caramel",
-        notes_ethiopia: "Notes: Jasmine, Bergamot, Black Tea",
-        notes_colombia: "Notes: Strawberry, White Chocolate, Yogurt",
-        notes_guatemala: "Notes: Red Apple, Milk Chocolate, Hazelnut",
-        notes_brazil: "Notes: Dark Chocolate, Toasted Almond, Caramel",
-        notes_costa_rica: "Notes: Honey, Orange Blossom, Milk Chocolate",
+        notes_andy: "Blood orange · milk chocolate · caramel",
+        notes_ethiopia: "Jasmine · bergamot · black tea",
+        notes_colombia: "Strawberry · white chocolate · yogurt",
+        notes_guatemala: "Red apple · milk chocolate · hazelnut",
+        notes_brazil: "Dark chocolate · toasted almond · caramel",
+        notes_costa_rica: "Honey · orange blossom · milk chocolate",
         btn_add_to_bag: "Add to Bag",
         btn_added: "Added!",
         btn_quick_view: "Quick View",
@@ -1091,12 +1109,12 @@ const dictionary = {
         shop_item3_title: "Guatemala Huehuetenango",
         shop_item4_title: "Brazil Cerrado Mineiro",
         shop_item6_title: "Costa Rica Tarrazu",
-        notes_andy: "Notas: Naranja Roja, Chocolate con Leche, Caramelo Dulce",
-        notes_ethiopia: "Notas: Jazmín, Bergamota, Té Negro",
-        notes_colombia: "Notas: Fresa, Chocolate Blanco, Yogur",
-        notes_guatemala: "Notas: Manzana Roja, Chocolate con Leche, Avellana",
-        notes_brazil: "Notas: Chocolate Negro, Almendra Tostada, Caramelo",
-        notes_costa_rica: "Notas: Miel, Flor de Azahar, Chocolate con Leche",
+        notes_andy: "Naranja sanguina · chocolate con leche · caramelo",
+        notes_ethiopia: "Jazmín · bergamota · té negro",
+        notes_colombia: "Fresa · chocolate blanco · yogur",
+        notes_guatemala: "Manzana roja · chocolate con leche · avellana",
+        notes_brazil: "Chocolate negro · almendra tostada · caramelo",
+        notes_costa_rica: "Miel · flor de azahar · chocolate con leche",
         btn_add_to_bag: "Añadir a la Bolsa",
         btn_added: "¡Añadido!",
         btn_quick_view: "Vista Rápida",
@@ -1219,12 +1237,12 @@ const dictionary = {
         shop_item3_title: "Guatemala Huehuetenango",
         shop_item4_title: "Brazil Cerrado Mineiro",
         shop_item6_title: "Costa Rica Tarrazu",
-        notes_andy: "Ноти: Червоний Апельсин, Молочний Шоколад, Солодка Карамель",
-        notes_ethiopia: "Ноти: Жасмин, Бергамот, Чорний Чай",
-        notes_colombia: "Ноти: Полуниця, Білий Шоколад, Йогурт",
-        notes_guatemala: "Ноти: Червоне Яблуко, Молочний Шоколад, Фундук",
-        notes_brazil: "Ноти: Темний Шоколад, Смажений Мигдаль, Карамель",
-        notes_costa_rica: "Ноти: Мед, Квіти Апельсина, Молочний Шоколад",
+        notes_andy: "Червоний апельсин · молочний шоколад · карамель",
+        notes_ethiopia: "Жасмин · бергамот · чорний чай",
+        notes_colombia: "Полуниця · білий шоколад · йогурт",
+        notes_guatemala: "Червоне яблуко · молочний шоколад · фундук",
+        notes_brazil: "Темний шоколад · смажений мигдаль · карамель",
+        notes_costa_rica: "Мед · цвіт апельсина · молочний шоколад",
         btn_add_to_bag: "Додати в кошик",
         btn_added: "Додано!",
         btn_quick_view: "Швидкий Перегляд",

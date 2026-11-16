@@ -1,4 +1,4 @@
-![Terroir Coffee cover with a ceramic cup and pour-over coffee](docs/terroir-cover.jpg)
+![Terroir Coffee catalog with illustrated coffee pouches](docs/catalog.jpg)
 
 # Terroir Coffee
 
@@ -24,4 +24,4 @@ Open [localhost:5173](http://localhost:5173/) in your browser. The site uses HTM
 
 The shop details, reviews and prices illustrate the design. The bag does not place orders or accept payments. The taste quiz is rule-based, and the catalog editor saves changes only in the current browser.
 
-The README cover was generated for this project.
+The product package images were generated for this project. The cover above is a screenshot of the catalog. [Original coffee artwork](docs/terroir-cover.jpg).
