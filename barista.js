@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 body: JSON.stringify({ question: question.value.trim(), topic: form.elements.topic.value, lang }),
             });
             if (response.status === 429) {
-                output.textContent = dictionary[activeLanguage].barista_limit;
+                output.textContent = pickBaristaMessage('barista_limit');
                 return;
             }
             if (!response.ok) throw Error('Could not answer');
@@ -66,9 +66,14 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
         } catch {
             output.removeAttribute('lang');
-            output.textContent = dictionary[activeLanguage].barista_error;
+            output.textContent = pickBaristaMessage('barista_error');
         } finally {
             submit.disabled = false;
         }
     });
 });
+
+function pickBaristaMessage(key) {
+    const messages = dictionary[activeLanguage][key];
+    return messages[Math.floor(Math.random() * messages.length)];
+}
