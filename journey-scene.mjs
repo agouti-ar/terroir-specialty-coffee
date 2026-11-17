@@ -142,10 +142,14 @@ export function startJourney(stage, drawChapter) {
     let displayed = 0;
     let frame = 0;
     let chapter = -1;
+    let previousFrame = 0;
 
-    function render() {
+    function render(time) {
         frame = 0;
-        displayed += (desired - displayed) * .17;
+        // Use elapsed time so an older GPU does not leave the camera behind the scroll position.
+        const elapsed = previousFrame ? time - previousFrame : 16;
+        previousFrame = time;
+        displayed += (desired - displayed) * (1 - Math.exp(-elapsed / 55));
         if (Math.abs(desired - displayed) < .0009) displayed = desired;
         const progress = displayed;
         camera.position.copy(view.getPoint(progress));
