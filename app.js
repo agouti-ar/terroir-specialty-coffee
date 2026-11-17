@@ -682,7 +682,7 @@ function initPromoCopy() {
     if (!copyBtn) return;
 
     copyBtn.addEventListener('click', () => {
-        const code = copyBtn.getAttribute('data-code') || 'ANDY10';
+        const code = copyBtn.getAttribute('data-code') || 'TERROIR10';
         navigator.clipboard.writeText(code).then(() => {
             const currentLang = activeLanguage;
             const langDict = dictionary[currentLang] || dictionary.en;
@@ -878,6 +878,8 @@ const dictionary = {
     en: {
         loc_demo_contact: "Demo contact",
         map_title: "Map of central Madrid",
+        map_marker: "Terroir Concept Location",
+        map_note: "Illustrative point in Madrid",
         map_open: "Open Madrid in OpenStreetMap",
         nav_menu: "MENU",
         nav_shop: "SHOP",
@@ -949,9 +951,9 @@ const dictionary = {
         story_tag: "MADRID & SEVILLE VIBES",
         story_subtitle: "Our Inspiration & Story",
         story_title: "Crafted with Soul, Dedicated to Andy",
-        story_desc: "Crafted under the impression of Spanish streets and dedicated to our muse Andy from Madrid. A blend created for those who need warmth, care, and flawless coffee on every shift.",
+        story_desc: "Inspired by Madrid’s café culture and the pleasure of taking good coffee home. Dedicated to our muse from Madrid.",
         story_banner_title: "Demo Tasting Offer",
-        story_banner_text: "Use code ANDY10 for 10% off your first bag",
+        story_banner_text: "Use code TERROIR10 for 10% off your first bag",
         story_copy_code: "Copy Code",
         story_code_copied: "Copied!",
         story_signature: "~ Dedicated to Andy, Madrid ~",
@@ -1024,6 +1026,8 @@ const dictionary = {
     es: {
         loc_demo_contact: "Contacto de demostración",
         map_title: "Mapa del centro de Madrid",
+        map_marker: "Ubicación conceptual de Terroir",
+        map_note: "Punto ilustrativo en Madrid",
         map_open: "Ver Madrid en OpenStreetMap",
         nav_menu: "MENÚ",
         nav_shop: "TIENDA",
@@ -1095,9 +1099,9 @@ const dictionary = {
         story_tag: "ESPÍRITU DE MADRID Y SEVILLA",
         story_subtitle: "Nuestra Inspiración e Historia",
         story_title: "Elaborado con Alma, Dedicado a Andy",
-        story_desc: "Elaborado bajo la impresión de las calles españolas y dedicado a nuestra musa Andy de Madrid. Una mezcla creada para quienes necesitan calidez, cuidado y un café impecable en cada turno.",
+        story_desc: "Inspirado en la cultura de los cafés de Madrid y en el placer de llevarse un buen café a casa. Dedicado a nuestra musa de Madrid.",
         story_banner_title: "Oferta de degustación de muestra",
-        story_banner_text: "Usa el código ANDY10 para un 10% de descuento en tu primera bolsa",
+        story_banner_text: "Usa el código TERROIR10 para un 10% de descuento en tu primera bolsa",
         story_copy_code: "Copiar Código",
         story_code_copied: "¡Copiado!",
         story_signature: "~ Dedicado a Andy, Madrid ~",
@@ -1170,6 +1174,8 @@ const dictionary = {
     ua: {
         loc_demo_contact: "Демонстраційний контакт",
         map_title: "Карта центру Мадрида",
+        map_marker: "Концептуальна локація Terroir",
+        map_note: "Умовна позначка в Мадриді",
         map_open: "Відкрити Мадрид в OpenStreetMap",
         nav_menu: "МЕНЮ",
         nav_shop: "МАГАЗИН",
@@ -1241,9 +1247,9 @@ const dictionary = {
         story_tag: "ВАЙБ МАДРИДА ТА СЕВІЛЬЇ",
         story_subtitle: "Наша Історія та Натхнення",
         story_title: "Створено з Душею, Присвячено Енді",
-        story_desc: "Створено під враженням іспанських вуличок та присвячено нашій музі Енді з Мадрида. Бленд, створений для тих, кому потрібні тепло, турбота та бездоганна кава на кожній зміні.",
+        story_desc: "Нас надихнула культура мадридських кав’ярень і можливість забрати улюблену каву додому. Присвячено нашій музі з Мадрида.",
         story_banner_title: "Демонстраційна пропозиція",
-        story_banner_text: "Використовуйте промокод ANDY10 для знижки 10% на першу пачку",
+        story_banner_text: "Використовуйте промокод TERROIR10 для знижки 10% на першу пачку",
         story_copy_code: "Скопіювати код",
         story_code_copied: "Скопійовано!",
         story_signature: "~ Присвячено Енді, Мадрид ~",

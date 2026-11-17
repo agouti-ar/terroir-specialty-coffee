@@ -210,7 +210,7 @@ a {
 
 .hero-photo {
     object-fit: cover;
-    object-position: right center;
+    object-position: var(--hero-x, 100%) var(--hero-y, 50%);
     z-index: -2;
 }
 
@@ -226,7 +226,7 @@ a {
         align-items: flex-end;
         padding-block: 9rem 3rem;
     }
-    .hero-photo { object-position: 75% top; }
+    .hero-photo { --hero-x: 86%; --hero-y: 0%; }
     .hero::after { background: linear-gradient(0deg, #090707 5%, #090707d9 35%, transparent 78%); }
     .hero .hero-content { margin-top: 0; }
 }
@@ -2649,3 +2649,40 @@ a {
 .barista-privacy { font-size: 0.8rem; opacity: 0.8; }
 #barista-answer:empty, #barista-products:empty { display: none; }
 #barista-answer { overflow-wrap: anywhere; white-space: pre-line; }
+
+
+.hero-steam {
+    position: absolute;
+    left: var(--steam-x, -200px);
+    top: var(--steam-y, 0px);
+    width: var(--steam-size, 62px);
+    height: var(--steam-size, 62px);
+    transform: translate(-50%, -100%);
+    pointer-events: none;
+    z-index: -1;
+}
+.hero-steam i {
+    position: absolute;
+    left: 22%;
+    bottom: 0;
+    width: 36%;
+    height: 96%;
+    border-radius: 50%;
+    background: radial-gradient(ellipse, #ffe2ba51, #edd5c322 40%, transparent 72%);
+    filter: blur(2px);
+    opacity: 0;
+    transform-origin: 50% 100%;
+    animation: steam-rise 5.8s linear infinite;
+}
+.hero-steam i:nth-child(2) { left: 42%; animation-delay: -2s; animation-duration: 6.8s; }
+.hero-steam i:nth-child(3) { left: 35%; animation-delay: -4s; animation-duration: 7.5s; }
+@keyframes steam-rise {
+    0% { transform: translateY(12%) scale(.45, .37) rotate(-10deg); opacity: 0; }
+    22% { opacity: .48; }
+    53% { transform: translate(21%, -20%) scale(.8, .75) rotate(12deg); opacity: .32; }
+    100% { transform: translate(-61%, -75%) scale(1.3, 1.1) rotate(-24deg); opacity: 0; }
+}
+.hero { overflow: clip; }
+.map-caption { display: grid; gap: .15rem; padding: .85rem 1rem; color: #f4e0b9; }
+.map-caption span { color: #c3b5a0; font-size: .85rem; }
+@media (prefers-reduced-motion: reduce) { .hero-steam { display: none; } }
