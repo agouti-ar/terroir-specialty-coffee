@@ -2718,7 +2718,7 @@ body:has(.journey) { overflow-x: clip; }
 #journey-status:empty { display: none; }
 #journey-status { margin-top: .8rem; color: #f4cf9e; }
 .journey-scroll { height: min(275vh, 2240px); margin-top: 3rem; overflow-anchor: none; }
-.journey-stage { height: calc(100svh - 72px); min-height: 380px; position: sticky; top: 72px; overflow: hidden; background: #1c1410; }
+.journey-stage { height: calc(100svh - var(--journey-nav-height, 72px)); min-height: 380px; position: sticky; top: var(--journey-nav-height, 72px); overflow: hidden; background: #1c1410; }
 .journey-stage canvas, .journey-hud { position: absolute; width: 100%; height: 100%; inset: 0; }
 .journey-hud {
     display: grid;
@@ -2756,5 +2756,5 @@ body:has(.journey) { overflow-x: clip; }
     .journey { padding-block: 4rem; }
     .journey-notes { grid-template-columns: 1fr; margin-top: 2.75rem; }
     .journey-hud { padding: 1rem 1.1rem; }
-    .journey-stage { min-height: 295px; top: 64px; height: calc(100svh - 64px); }
+    .journey-stage { min-height: 295px; }
 }

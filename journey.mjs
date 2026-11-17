@@ -7,6 +7,15 @@ const chapterTitle = document.getElementById('journey-chapter-title');
 const chapterText = document.getElementById('journey-chapter-text');
 const shop = document.getElementById('journey-shop');
 const motion = matchMedia('(prefers-reduced-motion: reduce)');
+const header = document.querySelector('body > .header');
+
+if (header) {
+    const syncHeaderHeight = () => {
+        section.style.setProperty('--journey-nav-height', Math.ceil(header.getBoundingClientRect().height) + 'px');
+    };
+    new ResizeObserver(syncHeaderHeight).observe(header);
+    syncHeaderHeight();
+}
 const translations = {
     "en": {
         "load": "Loading the scene…",
