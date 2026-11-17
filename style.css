@@ -2626,3 +2626,26 @@ a {
         font-size: 11px;
     }
 }
+
+/* Optional AI section. */
+.barista-form {
+    display: grid;
+    text-align: left;
+    gap: 0.6rem;
+    margin-top: 1.25rem;
+}
+.barista-form[hidden] { display: none; }
+.barista-form h3 { margin-bottom: 0.35rem; }
+.barista-form select, .barista-form textarea {
+    padding: 0.65rem;
+    color: inherit;
+    background: #171411;
+    border: 1px solid #78613a;
+    border-radius: 0.35rem;
+    font: inherit;
+    width: 100%;
+}
+.barista-form button[type="submit"] { justify-self: start; }
+.barista-privacy { font-size: 0.8rem; opacity: 0.8; }
+#barista-answer:empty, #barista-products:empty { display: none; }
+#barista-answer { overflow-wrap: anywhere; white-space: pre-line; }
