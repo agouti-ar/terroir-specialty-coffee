@@ -1,5 +1,14 @@
 document.addEventListener('DOMContentLoaded', async () => {
     const form = document.getElementById('barista-form');
+    const question = form.elements.question;
+    form.autocomplete = 'off';
+    question.autocomplete = 'off';
+    const clearQuestion = () => {
+        question.value = '';
+        question.setCustomValidity('');
+    };
+    clearQuestion();
+    window.addEventListener('pageshow', clearQuestion);
     if (location.protocol === 'file:') return;
 
     try {
@@ -10,7 +19,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     form.hidden = false;
-    const question = form.elements.question;
     const output = document.getElementById('barista-answer');
     const productLinks = document.getElementById('barista-products');
     const submit = form.querySelector('button[type="submit"]');
