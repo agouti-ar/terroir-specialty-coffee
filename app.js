@@ -167,7 +167,15 @@ function showQuizResult() {
     if (resultTitle) resultTitle.textContent = product ? (copy[product.titleKey] || product.title) : copy.quiz_unavailable;
     document.getElementById('quiz-product-btn').hidden = !product;
     if (resultDesc) {
-        resultDesc.innerText = product ? (matchedCoffee.desc[currentLang] || matchedCoffee.desc.en) : '';
+        const reasons = {
+en: ['You chose ', 'fruity or floral flavours', 'chocolate or nut flavours', ' and ', 'filter brewing', 'espresso or moka', '. This coffee is a starting point for that combination. '],
+es: ['Elegiste ', 'sabores afrutados o florales', 'chocolate o frutos secos', ' y ', 'preparación de filtro', 'espresso o moka', '. Este café encaja como punto de partida. '],
+ua: ['Ви обрали ', 'фруктові або квіткові смаки', 'шоколадні або горіхові смаки', ' та ', 'фільтр', 'еспресо або гейзерну кавоварку', '. Ця кава — початок для такого поєднання. '],
+de: ['Du hast ', 'fruchtige oder blumige Aromen', 'Schokolade oder Nüsse', ' und ', 'Filterkaffee', 'Espresso oder Mokka', ' gewählt. Dieser Kaffee passt als Ausgangspunkt dazu. ']
+};
+const words = reasons[currentLang] || reasons.en;
+const reason = words[0] + words[userPreferences.roast === 'light' ? 1 : 2] + words[3] + words[userPreferences.brew === 'filter' ? 4 : 5] + words[6];
+resultDesc.innerText = product ? reason + (matchedCoffee.desc[currentLang] || matchedCoffee.desc.en) : '';
     }
     if (quizResult) quizResult.style.display = 'block';
 }
