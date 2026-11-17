@@ -2731,7 +2731,13 @@ body:has(.journey) { overflow-x: clip; }
 .journey-stop { border: 1px solid #d9a561; border-radius: .25rem; background: #1d130fba; color: #fae5c9; padding: .45rem .9rem; min-height: 44px; justify-self: end; }
 .journey-chapter h3 { font-size: clamp(2rem, 5vw, 4rem); margin: .5rem 0; }
 .journey-chapter p { max-width: 46ch; }
-#journey-shop { margin-top: 1rem; }
+#journey-shop:not([hidden]), .journey-end a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    margin-top: 1rem;
+}
 .journey-notes {
     width: min(88%, 1120px);
     margin: 4rem auto 2rem;
