@@ -37,3 +37,9 @@ The Coffee Finder works on the static site. The AI barista also supports compari
 3. Test one question in each mode on Preview. Before enabling production, add a WAF rate limit to POST requests on `/api/barista` and verify the quota on the Gemini project. Then configure the production variables and redeploy.
 
 The app sends the question, instruction and public catalog data to Gemini. It does not store a chat history or use a database. If the AI barista is disabled or unavailable, the original quiz remains usable.
+
+## From Origin to Cup preview
+
+The 3D scene on this branch is a working camera prototype covering roasting, packing and the cup. Growing and processing are described in the static story. On-demand Three.js is served from this repository with its MIT license. Serve over HTTP to test the local modules.
+
+Coffee background: [World Coffee Research variety catalog](https://varieties.worldcoffeeresearch.org/) and the [SCA Coffee Standards](https://sca.coffee/research/coffee-standards). The roastery and café are fictional.
