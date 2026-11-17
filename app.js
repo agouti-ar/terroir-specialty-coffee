@@ -145,35 +145,39 @@ let userPreferences = {
 
 const coffeeDatabase = {
     'light-filter': {
-        title: "Ethiopia Yirgacheffe",
+        id: 'prod-1',
         desc: {
             en: "An incredible light roast. Perfect for filter or Turk. Explodes with floral notes of jasmine, bergamot, and sweet black tea.",
             es: "Un increíble tueste ligero. Perfecto para filtro o cafetera turca. Con notas florales de jazmín, bergamota y té negro.",
-            ua: "Неймовірна світла кава. Ідеально для фільтра або турки. Розкривається квітковими нотами жасмину, бергамоту та чорного чаю."
+            ua: "Неймовірна світла кава. Ідеально для фільтра або турки. Розкривається квітковими нотами жасмину, бергамоту та чорного чаю.",
+            de: "Jasmin, Bergamotte und schwarzer Tee. Passt gut zu Filterkaffee."
         }
     },
     'light-espresso': {
-        title: "Colombia Finca El Paraiso",
+        id: 'prod-2',
         desc: {
             en: "Light-medium roast. Gives a bright, modern espresso shot with unique notes of strawberry yogurt and white chocolate.",
             es: "Tueste medio-ligero. Espresso moderno y brillante con notas únicas de yogur de fresa y chocolate blanco.",
-            ua: "Світло-середнє обсмаження. Яскравий сучасний еспресо з унікальними нотами полуничного йогурту та білого шоколаду."
+            ua: "Світло-середнє обсмаження. Яскравий сучасний еспресо з унікальними нотами полуничного йогурту та білого шоколаду.",
+            de: "Erdbeere und weisse Schokolade für einen fruchtigen Espresso."
         }
     },
     'dark-filter': {
-        title: "Guatemala Huehuetenango",
+        id: 'prod-3',
         desc: {
             en: "Medium-dark roast. Smooth and rich body with sweet notes of red apple, milk chocolate, and a clean nutty finish.",
             es: "Tueste medio-oscuro. Cuerpo suave y rico con notas de manzana roja, chocolate con leche y un final a nuez.",
-            ua: "Середньо-темне обсмаження. М'який насичений смак із нотами червоного яблука, молочного шоколаду та горіховим післясмаком."
+            ua: "Середньо-темне обсмаження. М'який насичений смак із нотами червоного яблука, молочного шоколаду та горіховим післясмаком.",
+            de: "Roter Apfel, Milchschokolade und Haselnuss für einen runden Filterkaffee."
         }
     },
     'dark-espresso': {
-        title: "Brazil Cerrado Mineiro",
+        id: 'prod-4',
         desc: {
             en: "Classic dark roast profile. Perfect for rich espresso. Low acidity, heavy body, full of rich dark chocolate and toasted nuts.",
             es: "Perfil clásico de tueste oscuro. Perfecto para un espresso denso. Baja acidez, mucho cuerpo y notas a chocolate negro.",
-            ua: "Класичне темне обсмаження. Ідеально для насиченого еспресо. Низька кислотність, щільне тіло, ноти гіркого шоколаду."
+            ua: "Класичне темне обсмаження. Ідеально для насиченого еспресо. Низька кислотність, щільне тіло, ноти гіркого шоколаду.",
+            de: "Dunkle Schokolade, geröstete Mandel und Karamell für einen kräftigen Espresso."
         }
     }
 };
@@ -196,8 +200,14 @@ function initQuiz() {
             } else if (param === 'brew') {
                 if (step2) step2.style.display = 'none';
                 showQuizResult();
+                document.getElementById('result-title').focus();
             }
         });
+    });
+
+    document.getElementById('quiz-product-btn').addEventListener('click', () => {
+        const product = findQuizProduct();
+        if (product) openQuickView(product);
     });
 
     const quizRestartBtn = document.getElementById('quiz-restart-btn');
@@ -212,8 +222,14 @@ function initQuiz() {
             if (step1) step1.style.display = 'block';
 
             userPreferences = { roast: '', brew: '' };
+            step1?.querySelector('button')?.focus();
         });
     }
+}
+
+function findQuizProduct() {
+    const match = coffeeDatabase[`${userPreferences.roast}-${userPreferences.brew}`];
+    return match && getStoredProducts().find(product => product.id === match.id);
 }
 
 function showQuizResult() {
@@ -226,9 +242,12 @@ function showQuizResult() {
     const resultDesc = document.getElementById('result-description');
     const quizResult = document.getElementById('quiz-result');
 
-    if (resultTitle) resultTitle.innerText = matchedCoffee.title;
+    const product = findQuizProduct();
+    const copy = dictionary[currentLang];
+    if (resultTitle) resultTitle.textContent = product ? (copy[product.titleKey] || product.title) : copy.quiz_unavailable;
+    document.getElementById('quiz-product-btn').hidden = !product;
     if (resultDesc) {
-        resultDesc.innerText = matchedCoffee.desc[currentLang] || matchedCoffee.desc.en;
+        resultDesc.innerText = product ? (matchedCoffee.desc[currentLang] || matchedCoffee.desc.en) : '';
     }
     if (quizResult) quizResult.style.display = 'block';
 }
@@ -1021,10 +1040,12 @@ const dictionary = {
         // AI Barista Quiz Section
         ai_subtitle: "Coffee Finder",
         ai_title: "Find Your Perfect Match",
-        ai_desc: "Choose your roast and brewing method to find a coffee from the collection.",
-        quiz_q1: "1. What's your preferred roast profile?",
-        quiz_opt_light: "Light & Fruity (Bright acidity)",
-        quiz_opt_dark: "Dark & Chocolatey (Rich, bold)",
+        ai_desc: "Choose the flavours you like and how you brew to find a coffee from the collection.",
+        quiz_q1: "1. Which flavours sound good to you?",
+        quiz_product: "View this coffee",
+        quiz_unavailable: "This coffee is currently unavailable.",
+        quiz_opt_light: "Fruity or floral",
+        quiz_opt_dark: "Chocolatey or nutty",
         quiz_q2: "2. How do you usually brew your coffee?",
         quiz_opt_filter: "Filter / Cezve (Turk) / Drip",
         quiz_opt_espresso: "Espresso Machine / Moka Pot",
@@ -1152,10 +1173,12 @@ const dictionary = {
         // AI Barista Quiz Section
         ai_subtitle: "Buscador de café",
         ai_title: "Encuentra tu Café Ideal",
-        ai_desc: "Elige el tueste y el método de preparación para encontrar un café de la colección.",
-        quiz_q1: "1. ¿Cuál es tu perfil de tueste preferido?",
-        quiz_opt_light: "Claro y Frutal (Acidez brillante)",
-        quiz_opt_dark: "Oscuro y Enchocolatado (Rico, intenso)",
+        ai_desc: "Elige tus sabores y tu método de preparación para encontrar un café de la colección.",
+        quiz_q1: "1. ¿Qué sabores prefieres?",
+        quiz_product: "Ver este café",
+        quiz_unavailable: "Este café no está disponible en este momento.",
+        quiz_opt_light: "Afrutado o floral",
+        quiz_opt_dark: "Chocolate o frutos secos",
         quiz_q2: "2. ¿Cómo sueles preparar tu café?",
         quiz_opt_filter: "Filtro / Cafetera Turca / Goteo",
         quiz_opt_espresso: "Máquina de Espresso / Cafetera Italiana",
@@ -1283,10 +1306,12 @@ const dictionary = {
         // AI Barista Quiz Section
         ai_subtitle: "Підбір кави",
         ai_title: "Знайдіть свій ідеальний каву",
-        ai_desc: "Оберіть обсмаження та спосіб заварювання, щоб знайти каву з нашої добірки.",
-        quiz_q1: "1. Який профіль обсмаження ви віддаєте перевагу?",
-        quiz_opt_light: "Світле та Фруктове (Яскрава кислинка)",
-        quiz_opt_dark: "Темне та Шоколадне (Насичене, міцне)",
+        ai_desc: "Оберіть улюблені смаки та спосіб заварювання, щоб знайти каву з нашої добірки.",
+        quiz_q1: "1. Які смаки вам подобаються?",
+        quiz_product: "Переглянути цю каву",
+        quiz_unavailable: "Ця кава наразі недоступна.",
+        quiz_opt_light: "Фруктові або квіткові",
+        quiz_opt_dark: "Шоколадні або горіхові",
         quiz_q2: "2. Як ви зазвичай заварюєте каву?",
         quiz_opt_filter: "Фільтр / Турка / Крапельна",
         quiz_opt_espresso: "Еспресо-машина / Гейзерна",

@@ -182,18 +182,15 @@
             <div class="ai-content">
                 <span class="section-subtitle" data-i18n="ai_subtitle">Coffee Finder</span>
                 <h2 class="section-title" data-i18n="ai_title">Find Your Perfect Match</h2>
-                <p class="ai-description" data-i18n="ai_desc">Choose your roast and brewing method to find a coffee from the collection.</p>
+                <p class="ai-description" data-i18n="ai_desc">Choose the flavours you like and how you brew to find a coffee from the collection.</p>
 
                 <div class="ai-quiz-card" id="quiz-card">
                     <div class="quiz-step active" id="step-1">
-                        <h3 data-i18n="quiz_q1">1. What's your preferred roast profile?</h3>
+                        <h3 data-i18n="quiz_q1">1. Which flavours sound good to you?</h3>
                         <div class="quiz-options">
                             <button class="quiz-btn" data-param="roast" data-value="light"
-                                data-i18n="quiz_opt_light">Light & Fruity (Bright
-                                acidity)</button>
-                            <button class="quiz-btn" data-param="roast" data-value="dark" data-i18n="quiz_opt_dark">Dark
-                                & Chocolatey (Rich,
-                                bold)</button>
+                                data-i18n="quiz_opt_light">Fruity or floral</button>
+                            <button class="quiz-btn" data-param="roast" data-value="dark" data-i18n="quiz_opt_dark">Chocolatey or nutty</button>
                         </div>
                     </div>
 
@@ -209,11 +206,11 @@
                         </div>
                     </div>
 
-                    <div class="quiz-result" id="quiz-result" style="display: none;">
+                    <div class="quiz-result" id="quiz-result" style="display: none;" aria-live="polite">
                         <span class="section-subtitle" data-i18n="quiz_match">Your Perfect Match Is</span>
-                        <h3 class="result-title" id="result-title">Ethiopia Yirgacheffe</h3>
-                        <p class="result-description" id="result-description">Based on your taste profile, we highly
-                            recommend this origin.</p>
+                        <h3 class="result-title" id="result-title" tabindex="-1"></h3>
+                        <p class="result-description" id="result-description"></p>
+                        <button type="button" class="btn btn-outline" id="quiz-product-btn" data-i18n="quiz_product">View this coffee</button>
                         <button class="btn btn-primary" id="quiz-restart-btn" data-i18n="quiz_restart"
                             style="margin-top: 25px; padding: 10px 25px; font-size: 12px;">Take Quiz Again</button>
                     </div>

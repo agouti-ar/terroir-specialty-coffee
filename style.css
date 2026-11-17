@@ -1862,6 +1862,10 @@ a {
     background-color: #0b0a0a;
 }
 
+#quiz-product-btn[hidden] {
+    display: none;
+}
+
 /* Custom Leaflet Map Pin & Popup */
 .custom-map-pin {
     background: transparent;
