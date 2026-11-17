@@ -276,6 +276,7 @@ function renderShopCatalog() {
                 </div>
             </div>
             <div class="product-info">
+                <p class="product-format">${productFormat(product, langDict)}</p>
                 <h3 class="product-title">${titleText}</h3>
                 <p class="product-notes">${notesText}</p>
                 <div class="product-bottom">
@@ -382,6 +383,7 @@ function openQuickView(product) {
     const qvQtyValEl = document.getElementById('qvQtyValue');
     const qvAddBtnEl = document.getElementById('qvAddBtn');
 
+    document.getElementById('qvFormat').textContent = productFormat(product, langDict);
     if (qvTitleEl) qvTitleEl.textContent = titleText;
     if (qvPriceEl) qvPriceEl.textContent = '€' + Number(product.price).toFixed(2);
     if (qvNotesEl) qvNotesEl.textContent = notesText;
@@ -970,6 +972,17 @@ const dictionary = {
         // AI Barista Quiz Section
         ai_subtitle: "Coffee Finder",
         ai_title: "Find Your Perfect Match",
+        inside_label: "Inside Terroir",
+        inside_title: "Where Coffee Becomes Craft",
+        inside_caption: "Roasted here. Chosen with care.",
+        inside_subtitle: "A place to discover your next coffee.",
+        inside_body: "Our atelier brings the roaster, the coffee shelf and the bar together. We select each coffee for its character, then roast it to bring that character into the cup.",
+        inside_invite: "Take a seat and taste before you choose. Find a favourite at the bar, then take the same beans home.",
+        inside_alt_room: "The atelier, imagined in Madrid",
+        inside_alt_barista: "From our bar to your daily ritual",
+        pack_250: "250 g",
+        line_single: "Single Origin",
+        line_limited: "Limited Edition",
         barista_title: "Ask the AI barista",
         barista_topic: "What would you like help with?",
         barista_choose: "Choose a coffee",
@@ -1118,6 +1131,17 @@ const dictionary = {
         // AI Barista Quiz Section
         ai_subtitle: "Buscador de café",
         ai_title: "Encuentra tu Café Ideal",
+        inside_label: "Dentro de Terroir",
+        inside_title: "Donde el café se convierte en artesanía",
+        inside_caption: "Tostado aquí. Elegido con cuidado.",
+        inside_subtitle: "Un lugar para descubrir tu próximo café.",
+        inside_body: "Nuestro atelier reúne el tostadero, la tienda y la barra. Elegimos cada café por su carácter y lo tostamos para llevar ese carácter a la taza.",
+        inside_invite: "Siéntate y prueba antes de elegir. Descubre tu favorito en la barra y llévate los mismos granos a casa.",
+        inside_alt_room: "El atelier, imaginado en Madrid",
+        inside_alt_barista: "De nuestra barra a tu ritual diario",
+        pack_250: "250 g",
+        line_single: "Origen único",
+        line_limited: "Edición limitada",
         barista_title: "Pregunta al barista IA",
         barista_topic: "¿En qué te ayudamos?",
         barista_choose: "Elegir un café",
@@ -1266,6 +1290,17 @@ const dictionary = {
         // AI Barista Quiz Section
         ai_subtitle: "Підбір кави",
         ai_title: "Знайдіть свій ідеальний каву",
+        inside_label: "Усередині Terroir",
+        inside_title: "Де кава стає ремеслом",
+        inside_caption: "Обсмажуємо тут. Обираємо з увагою.",
+        inside_subtitle: "Місце, де знаходять свою каву.",
+        inside_body: "Наше ательє поєднує обсмажувальню, магазин і кавову стійку. Ми обираємо кожну каву за її характером і розкриваємо його в чашці завдяки обсмаженню.",
+        inside_invite: "Сідайте й спробуйте перед покупкою. Знайдіть улюблену каву біля стійки та заберіть таке саме зерно додому.",
+        inside_alt_room: "Ательє, уявлене в Мадриді",
+        inside_alt_barista: "Від нашої стійки до вашого щоденного ритуалу",
+        pack_250: "250 г",
+        line_single: "Моносорт",
+        line_limited: "Лімітована серія",
         barista_title: "Запитайте ШІ-баристу",
         barista_topic: "З чим вам допомогти?",
         barista_choose: "Підібрати каву",
@@ -1516,3 +1551,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     initScrollReveal();
 });
+
+function productFormat(product, copy) {
+    const original = DEFAULT_PRODUCTS.find(item => item.id === product.id);
+    const weight = product.weightGrams || original?.weightGrams;
+    const line = product.collectionKey || original?.collectionKey;
+    return [weight ? (weight === 250 ? copy.pack_250 : weight + ' g') : '', copy[line] || ''].filter(Boolean).join(' · ');
+}

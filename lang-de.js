@@ -1,4 +1,16 @@
 const germanCopy = {
+        inside_label: "Bei Terroir",
+        inside_title: "Wo Kaffee zum Handwerk wird",
+        inside_caption: "Hier geröstet. Mit Sorgfalt ausgewählt.",
+        inside_subtitle: "Ein Ort, um deinen nächsten Kaffee zu entdecken.",
+        inside_body: "Unser Atelier vereint Rösterei, Kaffeeregal und Bar. Wir wählen jeden Kaffee nach seinem Charakter aus und bringen ihn durch die Röstung in die Tasse.",
+        inside_invite: "Nimm Platz und probiere, bevor du dich entscheidest. Entdecke deinen Favoriten an der Bar und nimm dieselben Bohnen mit nach Hause.",
+        inside_alt_room: "Das Atelier, in Madrid erdacht",
+        inside_alt_barista: "Von unserer Bar zu deinem täglichen Ritual",
+        pack_250: "250 g",
+        line_single: "Single Origin",
+        line_limited: "Limitierte Edition",
+
         barista_title: "Frag den KI-Barista",
         barista_topic: "Wobei brauchst du Hilfe?",
         barista_choose: "Kaffee auswählen",
