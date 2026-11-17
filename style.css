@@ -2687,7 +2687,6 @@ a {
 .map-caption span { color: #c3b5a0; font-size: .85rem; }
 @media (prefers-reduced-motion: reduce) { .hero-steam { display: none; } }
 
-.map-beacon{position:absolute;left:60.93%;top:184px;width:44px;height:44px;transform:translate(-50%,-50%);display:grid;place-items:center;border-radius:50%;z-index:2}.map-beacon span{width:12px;height:12px;background:#ffe6a3;border:2px solid #a16b1b;border-radius:50%;box-shadow:0 0 12px #e6b852}.map-beacon::before,.map-beacon::after{content:"";position:absolute;inset:5px;border:1px solid #bb852c;border-radius:50%;animation:map-ripple 4s ease-out infinite;pointer-events:none}.map-beacon::after{animation-delay:-2s}@keyframes map-ripple{from{transform:scale(.4);opacity:.7}to{transform:scale(2.1);opacity:0}}@media(prefers-reduced-motion:reduce){.map-beacon::before,.map-beacon::after{animation:none;opacity:.35}}
 
 .inside-terroir{background:#090909;padding:110px 0 120px;color:#cbbfaa}
 .inside-heading{width:84%;max-width:1200px;margin:0 auto 48px;display:grid;grid-template-columns:1fr 2fr;gap:40px;align-items:start}
@@ -2702,3 +2701,5 @@ a {
 .inside-copy p{line-height:1.85;margin-top:18px;font-size:15px}
 .product-format{font-size:11px;letter-spacing:.055em;color:#c7aa75;margin-bottom:10px}
 @media(max-width:680px){.inside-terroir{padding:65px 0 70px}.inside-heading{grid-template-columns:1fr;gap:20px;margin-bottom:30px}.inside-spread{margin-top:52px;grid-template-columns:1fr;gap:35px}.inside-portrait{width:87%}.inside-copy{padding-left:5%}.inside-panorama{width:100%}.inside-panorama figcaption{padding-inline:8%}}
+
+.signature-map-icon{background:none;border:0}.signature-pin{position:relative;width:42px;height:48px;display:grid;place-items:center;background:#17120d;color:#e5bc71;border:1.5px solid #cba45d;border-radius:19px 19px 19px 3px;box-shadow:0 3px 15px #0009;font:25px Georgia,serif}.signature-pin::before,.signature-pin::after{content:"";position:absolute;inset:-7px;border:1px solid #d4ad64;border-radius:50%;animation:signature-rings 4s ease-out infinite;pointer-events:none}.signature-pin::after{animation-delay:-2s}@keyframes signature-rings{from{transform:scale(.65);opacity:.65}to{transform:scale(1.9);opacity:0}}@media(prefers-reduced-motion:reduce){.signature-pin::before,.signature-pin::after{animation:none;opacity:.25}}#atelier-map{height:380px;z-index:0}.leaflet-container{font-family:inherit}.leaflet-popup-content{line-height:1.65;color:#eadac1}.leaflet-popup-content-wrapper,.leaflet-popup-tip{background:#18130f}.leaflet-control-attribution{font-size:10px}
