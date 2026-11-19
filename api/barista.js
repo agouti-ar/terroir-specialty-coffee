@@ -21,6 +21,7 @@ module.exports = async function handler(req, res) {
 
     const { question, topic, lang } = req.body ?? {};
     if (typeof question !== 'string' || !question.trim() || question.length > 280 ||
+        typeof topic !== 'string' || typeof lang !== 'string' ||
         !Object.hasOwn(topics, topic) || !Object.hasOwn(languages, lang)) {
         return res.status(400).json({ error: 'input' });
     }
