@@ -130,6 +130,11 @@ const germanCopy = {
     "cart_total_label": "Gesamt:",
     "cart_checkout": "Demo-Warenkorb. Bestellungen und Zahlungen sind nicht möglich.",
     "admin_access": "Demo-Verwaltung",
+    "admin_demo_mode": "Demomodus — Änderungen werden nur in diesem Browser gespeichert",
+    "admin_restore": "Beispielkatalog wiederherstellen",
+    "admin_restore_confirm": "Die sechs Beispielprodukte in diesem Browser wiederherstellen? Deine lokalen Katalogänderungen werden ersetzt.",
+    "admin_count_one": "{count} Artikel",
+    "admin_count_other": "{count} Artikel",
     "admin_btn_delete": "Löschen",
     "footer_rights": "Alle Rechte vorbehalten."
 };

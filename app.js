@@ -20,11 +20,10 @@ const PRODUCTS_STORAGE_VERSION = 'v4_full_story_catalog';
 
 function getStoredProducts() {
     try {
-        const version = localStorage.getItem('products_version');
         const stored = localStorage.getItem('products');
-        if (stored && version === PRODUCTS_STORAGE_VERSION) {
+        if (stored !== null) {
             const parsed = JSON.parse(stored);
-            if (Array.isArray(parsed) && parsed.length > 0) {
+            if (Array.isArray(parsed)) {
                 const migrated = parsed.map(product => {
                     const originalImage = LEGACY_PRODUCT_IMAGES[product.id];
                     if (!originalImage || product.image !== originalImage) return product;
@@ -36,9 +35,12 @@ function getStoredProducts() {
                 }
                 return migrated;
             }
+            // Existing local data is replaced only by an explicit sample restore.
+            return [];
         }
     } catch (e) {
         console.warn('Error reading products from localStorage:', e);
+        return [];
     }
     saveStoredProducts(DEFAULT_PRODUCTS);
     try {
@@ -511,7 +513,7 @@ function addProductToCart(product, quantity = 1, buttonElement = null) {
     const title = (product.titleKey && langDict[product.titleKey]) ? langDict[product.titleKey] : product.title;
     const price = Number(product.price);
 
-    const existingProduct = cart.find(item => item.id === product.id || item.title === title);
+    const existingProduct = cart.find(item => item.id === product.id);
 
     if (existingProduct) {
         existingProduct.quantity += quantity;
@@ -726,6 +728,7 @@ function initAdminPanel() {
     const closeAdminDashBtn = document.getElementById('closeAdminDashBtn');
     const adminLogoutBtn = document.getElementById('adminLogoutBtn');
     const addProductForm = document.getElementById('addProductForm');
+    const restoreCatalogBtn = document.getElementById('restoreSampleCatalogBtn');
 
     if (!openAdminBtn) return;
 
@@ -798,6 +801,18 @@ function initAdminPanel() {
         });
     }
 
+    if (restoreCatalogBtn) {
+        restoreCatalogBtn.addEventListener('click', () => {
+            if (!window.confirm(dictionary[activeLanguage].admin_restore_confirm)) return;
+            saveStoredProducts(DEFAULT_PRODUCTS);
+            try {
+                localStorage.setItem('products_version', PRODUCTS_STORAGE_VERSION);
+            } catch (e) { }
+            renderShopCatalog();
+            renderAdminProductsList();
+        });
+    }
+
     if (addProductForm) {
         addProductForm.addEventListener('submit', (e) => {
             e.preventDefault();
@@ -840,6 +855,12 @@ function renderAdminProductsList() {
     const products = getStoredProducts();
     const currentLang = activeLanguage;
     const langDict = dictionary[currentLang] || dictionary.en;
+    const countEl = document.getElementById('adminProductsCount');
+    if (countEl) {
+        const category = new Intl.PluralRules(currentLang === 'ua' ? 'uk' : currentLang).select(products.length);
+        const template = langDict['admin_count_' + category] || langDict.admin_count_other;
+        countEl.textContent = template.replace('{count}', String(products.length));
+    }
 
     listEl.innerHTML = '';
 
@@ -1047,6 +1068,11 @@ const dictionary = {
 
         // Admin & Footer
         admin_access: "Admin Access",
+        admin_demo_mode: "Demo Mode — changes are stored in this browser only",
+        admin_restore: "Restore Sample Catalog",
+        admin_restore_confirm: "Restore the six sample products in this browser? This will replace your local catalog changes.",
+        admin_count_one: "{count} item",
+        admin_count_other: "{count} items",
         admin_btn_delete: "Delete",
         footer_rights: "All rights reserved."
     },
@@ -1211,6 +1237,11 @@ const dictionary = {
 
         // Admin & Footer
         admin_access: "Acceso Admin",
+        admin_demo_mode: "Modo demo — los cambios se guardan solo en este navegador",
+        admin_restore: "Restaurar catálogo de ejemplo",
+        admin_restore_confirm: "¿Restaurar los seis productos de ejemplo en este navegador? Se sustituirán los cambios de tu catálogo local.",
+        admin_count_one: "{count} producto",
+        admin_count_other: "{count} productos",
         admin_btn_delete: "Eliminar",
         footer_rights: "Todos los derechos reservados."
     },
@@ -1375,6 +1406,13 @@ const dictionary = {
 
         // Admin & Footer
         admin_access: "Адмін-доступ",
+        admin_demo_mode: "Демо-режим — зміни зберігаються лише в цьому браузері",
+        admin_restore: "Відновити демокаталог",
+        admin_restore_confirm: "Відновити шість демонстраційних товарів у цьому браузері? Поточні зміни локального каталогу буде замінено.",
+        admin_count_one: "{count} товар",
+        admin_count_few: "{count} товари",
+        admin_count_many: "{count} товарів",
+        admin_count_other: "{count} товарів",
         admin_btn_delete: "Видалити",
         footer_rights: "Всі права захищені."
     }
