@@ -12,6 +12,8 @@ const germanCopy = {
         line_limited: "Limitierte Edition",
 
         barista_title: "Frag den KI-Barista",
+        bruma_signature: "Bruma — Dein KI-Kaffeeguide",
+        bruma_you: "Du",
         barista_topic: "Wobei brauchst du Hilfe?",
         barista_choose: "Kaffee auswählen",
         barista_compare: "Kaffees vergleichen",

@@ -222,19 +222,34 @@
                     </div>
                 </div>
                 <form id="barista-form" class="ai-quiz-card barista-form" hidden aria-labelledby="barista-title">
-                    <h3 id="barista-title" data-i18n="barista_title">Ask the AI barista</h3>
+                    <div class="barista-header">
+                        <img class="bruma-avatar" src="assets/bruma/bruma-avatar.webp" width="64" height="64" alt="" loading="lazy" decoding="async">
+                        <div>
+                            <h3 id="barista-title" data-i18n="barista_title">Ask the AI barista</h3>
+                            <p class="barista-signature" data-i18n="bruma_signature">Bruma — Your AI Coffee Guide</p>
+                        </div>
+                    </div>
                     <label for="barista-topic" data-i18n="barista_topic">What would you like help with?</label>
                     <select name="topic" id="barista-topic">
                         <option value="choose" data-i18n="barista_choose">Choose a coffee</option>
                         <option value="compare" data-i18n="barista_compare">Compare coffees</option>
                         <option value="brew" data-i18n="barista_brew">Brewing advice</option>
                     </select>
+                    <div class="barista-conversation" role="log" aria-live="polite" aria-relevant="additions text">
+                        <div id="barista-user" class="barista-message barista-message-user" hidden>
+                            <span class="barista-speaker" data-i18n="bruma_you">You</span>
+                            <p id="barista-user-text" dir="auto"></p>
+                        </div>
+                        <div id="barista-reply" class="barista-message barista-message-ai" hidden>
+                            <span class="barista-speaker">Bruma</span>
+                            <p id="barista-answer" dir="auto"></p>
+                            <div id="barista-products" class="quiz-options"></div>
+                        </div>
+                    </div>
                     <label for="barista-question" data-i18n="barista_question">Your question</label>
                     <textarea id="barista-question" name="question" rows="2" maxlength="280" required
                         data-i18n-placeholder="barista_placeholder" placeholder="For example: I like a smooth coffee for a moka pot."></textarea>
                     <button type="submit" class="btn btn-primary" data-i18n="barista_submit">Ask</button>
-                    <p id="barista-answer" role="status"></p>
-                    <div id="barista-products" class="quiz-options"></div>
                 </form>
             </div>
         </div>

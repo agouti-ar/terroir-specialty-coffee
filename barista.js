@@ -20,6 +20,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     form.hidden = false;
     const output = document.getElementById('barista-answer');
+    const userMessage = document.getElementById('barista-user');
+    const userText = document.getElementById('barista-user-text');
+    const reply = document.getElementById('barista-reply');
     const productLinks = document.getElementById('barista-products');
     const submit = form.querySelector('button[type="submit"]');
 
@@ -35,6 +38,12 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
 
         submit.disabled = true;
+        userText.textContent = question.value.trim();
+        userText.removeAttribute('lang');
+        userMessage.hidden = false;
+        reply.hidden = false;
+        form.classList.add('is-waiting');
+        form.setAttribute('aria-busy', 'true');
         output.removeAttribute('lang');
         output.textContent = copy.barista_wait;
         productLinks.replaceChildren();
@@ -52,6 +61,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             if (!response.ok) throw Error('Could not answer');
             const result = await response.json();
             output.lang = result.language;
+            userText.lang = result.language;
             output.textContent = result.answer;
             const products = getStoredProducts();
             for (const id of result.productIds) {
@@ -69,6 +79,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             output.textContent = pickBaristaMessage('barista_error');
         } finally {
             submit.disabled = false;
+            form.classList.remove('is-waiting');
+            form.setAttribute('aria-busy', 'false');
         }
     });
 });
