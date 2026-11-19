@@ -113,7 +113,7 @@
 
     <section id="shop" class="shop-section">
         <div class="section-title-wrapper reveal-on-scroll">
-            <span class="section-subtitle" data-i18n="shop_subtitle">Single-Origin & Blends</span>
+            <span class="section-subtitle" data-i18n="shop_subtitle">Coffee Collection</span>
             <h2 class="section-title" data-i18n="shop_title">Whole Bean Coffee</h2>
         </div>
 
@@ -121,7 +121,7 @@
         <div class="catalog-controls reveal-on-scroll">
             <div class="catalog-search-wrapper">
                 <span class="search-icon">🔍</span>
-                <input type="text" id="catalogSearchInput" class="catalog-search-input" placeholder="Search coffee..."
+                <input type="text" id="catalogSearchInput" aria-label="Search coffee" class="catalog-search-input" placeholder="Search coffee..."
                     data-i18n-placeholder="search_placeholder" autocomplete="off">
                 <button type="button" id="catalogSearchClear" class="catalog-search-clear" title="Clear search"
                     aria-label="Clear search">&times;</button>
@@ -384,7 +384,7 @@
             <h2 data-i18n="cart_sidebar_title">Your Bag</h2>
             <div class="cart-header-actions">
                 <button class="clear-cart-btn" id="clear-cart-btn" data-i18n="cart_clear_btn">Clear All</button>
-                <button class="close-cart-btn" id="close-cart-btn">&times;</button>
+                <button class="close-cart-btn" id="close-cart-btn" aria-label="Close shopping bag">&times;</button>
             </div>
         </div>
 
@@ -414,7 +414,7 @@
             </div>
             <form id="adminAuthForm" class="admin-auth-form" autocomplete="off">
                 <div class="admin-form-group">
-                    <input type="password" id="adminPasswordInput" class="admin-input" placeholder="Enter password..."
+                    <input type="password" id="adminPasswordInput" aria-label="Admin password" class="admin-input" placeholder="Enter password..."
                         required autocomplete="off">
                 </div>
                 <div class="admin-demo-tag" data-i18n="admin_demo_hint">Demo password: 1234</div>

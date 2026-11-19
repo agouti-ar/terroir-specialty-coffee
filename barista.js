@@ -36,6 +36,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     const prepareExchange = (text, topic) => {
         // Reuse a failed turn on retry; preserve completed turns and their product handlers.
         if (exchange && !exchange.succeeded && exchange.text === text && exchange.topic === topic) return exchange;
+        if (!exchange) {
+            // Expand only when the visitor starts a turn, not while its reply arrives.
+            conversation.style.height = `${conversation.getBoundingClientRect().height}px`;
+            conversation.classList.add('has-exchanges');
+            conversation.getBoundingClientRect();
+            conversation.style.height = '';
+        }
         if (exchange) {
             for (const element of [exchange.user, exchange.reply, ...exchange.user.querySelectorAll('[id]'), ...exchange.reply.querySelectorAll('[id]')]) {
                 element.removeAttribute('id');

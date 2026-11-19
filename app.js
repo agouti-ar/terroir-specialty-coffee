@@ -206,7 +206,7 @@ function renderShopCatalog() {
             } else if (currentCatalogFilter === 'new') {
                 matchesFilter = product.category === 'new' || (product.badge && product.badge.toLowerCase().includes('new'));
             } else if (currentCatalogFilter === 'single_origin') {
-                matchesFilter = product.category === 'single_origin' || (product.badge && product.badge.toLowerCase().includes('single'));
+                matchesFilter = product.collectionKey === 'line_single' || product.category === 'single_origin' || (product.badge && product.badge.toLowerCase().includes('single'));
             }
         }
 
@@ -914,7 +914,7 @@ const dictionary = {
         menu_latte_desc: "Our signature latte with house-made smoked caramel syrup.",
 
         // Shop Section
-        shop_subtitle: "Single-Origin & Blends",
+        shop_subtitle: "Coffee Collection",
         shop_title: "Whole Bean Coffee",
         badge_special: "SPECIAL",
         badge_bestseller: "Best Seller",
@@ -950,12 +950,12 @@ const dictionary = {
         // Quick View Full Story Descriptions
         qv_full_story: "Full Story",
         qv_qty: "Qty",
-        story_andy: "Balanced specialty Arabica roast with rich notes of dark chocolate, sweet caramel, and Spanish red orange. Inspired by our muse from Madrid, created for those who need warmth, care, and flawless coffee on every shift.",
-        story_ethiopia: "Classic washed Yirgacheffe with bright floral aroma, jasmine notes, bergamot citrus, and a clean tea-like finish. Perfect for morning filter coffee.",
-        story_colombia: "Experimental anaerobic fermentation yielding intense sweet strawberry, white chocolate notes, and creamy yogurt body. Unforgettable specialty experience.",
-        story_guatemala: "High-altitude coffee with rich milk chocolate sweetness, red apple acidity, and toasted hazelnut aftertaste. Smooth and comforting.",
-        story_brazil: "Classic dark roast with deep dark chocolate, toasted almond, and smooth caramel. Ideal for espresso and milk-based drinks.",
-        story_costa_rica: "Sweet volcanic soil roast with notes of orange blossom, wild honey, and smooth milk chocolate. Exceptionally balanced cup.",
+        story_andy: "A balanced specialty Arabica roast with notes of milk chocolate, caramel, and blood orange. Inspired by our muse from Madrid, for those who appreciate warmth, care, and a good cup on every shift.",
+        story_ethiopia: "A classic washed Yirgacheffe with floral aromas, jasmine and bergamot notes, and a clean, tea-like finish. A bright choice for morning filter coffee.",
+        story_colombia: "Experimental anaerobic fermentation brings out sweet strawberry and white chocolate notes, with a creamy, yogurt-like body.",
+        story_guatemala: "High-altitude coffee with milk chocolate sweetness, red apple acidity, and a toasted hazelnut finish. Smooth and comforting.",
+        story_brazil: "A classic dark roast with notes of dark chocolate, toasted almond, and caramel. Well suited to espresso and milk-based drinks.",
+        story_costa_rica: "A balanced coffee with notes of honey, orange blossom, and milk chocolate.",
 
         // Brand Story Section
         story_tag: "MADRID & SEVILLE VIBES",
@@ -1038,6 +1038,8 @@ const dictionary = {
         // Cart Sidebar
         cart_sidebar_title: "Your Bag",
         cart_clear_btn: "Clear All",
+        cart_close: "Close shopping bag",
+        admin_password_label: "Admin password",
         cart_empty: "Your bag is empty.",
         cart_total_label: "Total:",
         cart_checkout: "Demo bag. Orders and payments are unavailable.",
@@ -1076,7 +1078,7 @@ const dictionary = {
         menu_latte_desc: "Nuestro latte insignia con jarabe de caramelo ahumado artesanal.",
 
         // Shop Section
-        shop_subtitle: "Origen Único y Mezclas",
+        shop_subtitle: "Colección de café",
         shop_title: "Café en Grano",
         badge_special: "ESPECIAL",
         badge_bestseller: "MÁS VENDIDO",
@@ -1112,12 +1114,12 @@ const dictionary = {
         // Quick View Full Story Descriptions
         qv_full_story: "Historia Completa",
         qv_qty: "Cant.",
-        story_andy: "Tueste equilibrado de Arabica de especialidad con ricas notas de chocolate negro, caramelo dulce y naranja roja española. Inspirado en nuestra musa de Madrid, creado para quienes necesitan calidez, cuidado y un café impecable en cada turno.",
+        story_andy: "Tueste equilibrado de Arabica de especialidad con notas de chocolate con leche, caramelo y naranja sanguina. Inspirado en nuestra musa de Madrid, creado para quienes necesitan calidez, cuidado y un café impecable en cada turno.",
         story_ethiopia: "Clásico Yirgacheffe lavado con brillante aroma floral, notas de jazmín, cítrico de bergamota y un final limpio como el té. Perfecto para café filtrado matutino.",
         story_colombia: "Fermentación anaeróbica experimental que produce intensa fresa dulce, notas de chocolate blanco y cuerpo cremoso de yogur. Una experiencia de especialidad inolvidable.",
         story_guatemala: "Café de gran altitud con rica dulzura de chocolate con leche, acidez de manzana roja y un postgusto tostado a avellana. Suave y reconfortante.",
         story_brazil: "Tueste oscuro clásico con profundo chocolate negro, almendra tostada y caramelo suave. Ideal para espresso y bebidas con leche.",
-        story_costa_rica: "Tueste en suelo volcánico dulce con notas de flor de azahar, miel silvestre y chocolate con leche suave. Taza excepcionalmente equilibrada.",
+        story_costa_rica: "Café equilibrado con notas de miel, flor de azahar y chocolate con leche.",
 
         // Brand Story Section
         story_tag: "ESPÍRITU DE MADRID Y SEVILLA",
@@ -1200,6 +1202,8 @@ const dictionary = {
         // Cart Sidebar
         cart_sidebar_title: "Tu Bolsa",
         cart_clear_btn: "Vaciar todo",
+        cart_close: "Cerrar la bolsa",
+        admin_password_label: "Contraseña de administración",
         cart_empty: "Tu bolsa está vacía.",
         cart_total_label: "Total:",
         cart_checkout: "Cesta de demostración. No se aceptan pedidos ni pagos.",
@@ -1238,7 +1242,7 @@ const dictionary = {
         menu_latte_desc: "Наш фірмовий латте з крафтовим сиропом копченої карамелі.",
 
         // Shop Section
-        shop_subtitle: "Моносорти та Бленди",
+        shop_subtitle: "Колекція кави",
         shop_title: "Зернова Кава",
         badge_special: "СПЕЦІАЛЬНИЙ",
         badge_bestseller: "БЕСТСЕЛЕР",
@@ -1274,12 +1278,12 @@ const dictionary = {
         // Quick View Full Story Descriptions
         qv_full_story: "Повна Історія",
         qv_qty: "Кількість",
-        story_andy: "Збалансоване спешелті обсмаження Arabica з нотами темного шоколаду, солодкої карамелі та червоного апельсина. Натхнення нашою музою з Мадрида, для тих, кому потрібні тепло, турбота і бездоганна кава.",
+        story_andy: "Збалансоване спешелті обсмаження Arabica з нотами молочного шоколаду, солодкої карамелі та червоного апельсина. Натхнення нашою музою з Мадрида, для тих, кому потрібні тепло, турбота і бездоганна кава.",
         story_ethiopia: "Класичний митий Іргачеф з яскравим квітковим ароматом, нотами жасмину, цитрусом бергамоту та чистим чайним фіналом. Ідеальна для ранкової фільтрованої кави.",
         story_colombia: "Експериментальна анаеробна ферментація з інтенсивною солодкою полуницею, нотами білого шоколаду та кремовим йогуртом. Незабутний досвід спешелті.",
         story_guatemala: "Високогірна кава з нотами молочного шоколаду, кислинку червоного яблука та смаженим фундуком. М'яка і затишна.",
         story_brazil: "Класичне темне обсмаження з глибоким чорним шоколадом, смаженим мигдалем і карамеллю. Ідеально для еспресо та молочних напоїв.",
-        story_costa_rica: "Напій з вулканічного грунту з нотами квіток апельсина, дикого меду та ніжного молочного шоколаду. Винятково збалансована чашка.",
+        story_costa_rica: "Збалансована кава з нотами меду, квіток апельсина та молочного шоколаду.",
 
         // Brand Story Section
         story_tag: "ВАЙБ МАДРИДА ТА СЕВІЛЬЇ",
@@ -1362,6 +1366,8 @@ const dictionary = {
         // Cart Sidebar
         cart_sidebar_title: "Ваш Кошик",
         cart_clear_btn: "Очистити все",
+        cart_close: "Закрити кошик",
+        admin_password_label: "Пароль адміністратора",
         cart_empty: "Ваш кошик порожній.",
         cart_total_label: "Разом:",
         cart_checkout: "Демонстраційний кошик. Замовлення та оплата недоступні.",
@@ -1406,6 +1412,9 @@ function setLanguage(lang, remember = false) {
         element.title = dictionary[lang][element.dataset.i18nTitle];
     });
     if (!dictionary[lang]) return;
+    document.getElementById('close-cart-btn')?.setAttribute('aria-label', dictionary[lang].cart_close);
+    document.getElementById('catalogSearchInput')?.setAttribute('aria-label', dictionary[lang].search_placeholder);
+    document.getElementById('adminPasswordInput')?.setAttribute('aria-label', dictionary[lang].admin_password_label);
 
     const i18nElements = document.querySelectorAll('[data-i18n]');
     i18nElements.forEach(el => {

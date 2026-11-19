@@ -36,4 +36,4 @@ The Coffee Finder works on the static site. The AI barista also supports compari
 2. In Vercel, add `GEMINI_API_KEY` as a sensitive Preview environment variable. Set `BARISTA_ENABLED=true` for Preview and redeploy. Optionally set `GEMINI_MODEL` to override the default `gemini-3.1-flash-lite`.
 3. Test one question in each mode on Preview. Before enabling production, add a WAF rate limit to POST requests on `/api/barista` and verify the quota on the Gemini project. Then configure the production variables and redeploy.
 
-The app sends the question, instruction and public catalog data to Gemini. It does not store a chat history or use a database. If the AI barista is disabled or unavailable, the original quiz remains usable.
+The app sends the question, instruction and public catalog data to Gemini. The interface keeps exchanges only in the current page. Each Gemini request contains only the current question, not previous exchanges. The app does not persist chat history or use a database. If the AI barista is disabled or unavailable, the original quiz remains usable.

@@ -2693,3 +2693,8 @@ a {
 .barista-message .barista-product-links { max-width: none; margin: 16px 0 0; gap: 8px; }
 .barista-message .barista-product-links:empty { display: none; }
 @media (max-width: 420px) { .barista-header .bruma-avatar { width: 64px; height: 64px; flex-basis: 64px; } .barista-signature { font-size: 9px; letter-spacing: .07em; } }
+
+/* Keep the greeting compact; bound the transcript after the first question. */
+.barista-conversation { height: auto; max-height: clamp(230px, 35svh, 360px); transition: height .18s ease; }
+.barista-conversation.has-exchanges { height: clamp(230px, 35svh, 360px); }
+@media (prefers-reduced-motion: reduce) { .barista-conversation { transition: none; } }
