@@ -206,7 +206,8 @@ function renderShopCatalog() {
             } else if (currentCatalogFilter === 'new') {
                 matchesFilter = product.category === 'new' || (product.badge && product.badge.toLowerCase().includes('new'));
             } else if (currentCatalogFilter === 'single_origin') {
-                matchesFilter = product.collectionKey === 'line_single' || product.category === 'single_origin' || (product.badge && product.badge.toLowerCase().includes('single'));
+                const collection = product.collectionKey || DEFAULT_PRODUCTS.find(item => item.id === product.id)?.collectionKey;
+                matchesFilter = collection ? collection === 'line_single' : product.category === 'single_origin' || (product.badge && product.badge.toLowerCase().includes('single'));
             }
         }
 
