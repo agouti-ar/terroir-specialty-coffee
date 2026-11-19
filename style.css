@@ -2680,3 +2680,16 @@ a {
 @keyframes bruma-breathe { 0%, 100% { box-shadow: 0 0 0 4px #b88c470a; } 50% { box-shadow: 0 0 0 6px #b88c471f, 0 0 18px #b88c4714; } }
 @media (max-width: 420px) { .barista-header { gap: 12px; } .bruma-avatar { width: 52px; height: 52px; flex-basis: 52px; } .barista-message { max-width: 100%; padding: 14px; } }
 @media (prefers-reduced-motion: reduce) { .barista-form.is-waiting .bruma-avatar { animation: none; } }
+
+/* Fixed transcript geometry keeps the composer stable as replies arrive. */
+.barista-header .bruma-avatar { width: 80px; height: 80px; flex-basis: 80px; }
+.barista-signature { font-size: 10px; letter-spacing: .1em; line-height: 1.8; }
+.barista-conversation { position: relative; height: clamp(230px, 35svh, 360px); overflow-y: auto; overflow-anchor: none; overscroll-behavior-y: contain; scrollbar-gutter: stable; scrollbar-width: thin; scrollbar-color: #8f713c #171411; padding: 4px 8px 4px 2px; align-content: start; }
+.barista-conversation:has(.barista-message:not([hidden])) { margin: 12px 0 8px; }
+.barista-conversation:focus-visible { outline: 2px solid #d4af37; outline-offset: 4px; }
+.barista-message { flex-shrink: 0; }
+.barista-message-ai .barista-speaker { display: flex; align-items: center; gap: 9px; }
+.bruma-message-avatar { width: 30px; height: 30px; flex: 0 0 30px; border-radius: 50%; object-fit: cover; border: 1px solid #b88c4770; }
+.barista-message .barista-product-links { max-width: none; margin: 16px 0 0; gap: 8px; }
+.barista-message .barista-product-links:empty { display: none; }
+@media (max-width: 420px) { .barista-header .bruma-avatar { width: 64px; height: 64px; flex-basis: 64px; } .barista-signature { font-size: 9px; letter-spacing: .07em; } }

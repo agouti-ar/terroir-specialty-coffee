@@ -12,7 +12,8 @@ const germanCopy = {
         line_limited: "Limitierte Edition",
 
         barista_title: "Frag den KI-Barista",
-        bruma_signature: "Bruma — Dein KI-Kaffeeguide",
+        bruma_signature: "BRUMA · DEIN KI-KAFFEEGUIDE",
+        bruma_greeting: "Willkommen bei Terroir. Ich bin Bruma, dein Kaffeeguide. Suchst du etwas Mildes, Kräftiges oder ein kleines Abenteuer?",
         bruma_you: "Du",
         barista_topic: "Wobei brauchst du Hilfe?",
         barista_choose: "Kaffee auswählen",

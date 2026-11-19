@@ -223,10 +223,10 @@
                 </div>
                 <form id="barista-form" class="ai-quiz-card barista-form" hidden aria-labelledby="barista-title">
                     <div class="barista-header">
-                        <img class="bruma-avatar" src="assets/bruma/bruma-avatar.webp" width="64" height="64" alt="" loading="lazy" decoding="async">
+                        <img class="bruma-avatar" src="assets/bruma/bruma-avatar-close.webp" width="80" height="80" alt="" loading="lazy" decoding="async">
                         <div>
                             <h3 id="barista-title" data-i18n="barista_title">Ask the AI barista</h3>
-                            <p class="barista-signature" data-i18n="bruma_signature">Bruma — Your AI Coffee Guide</p>
+                            <p class="barista-signature" data-i18n="bruma_signature">BRUMA · YOUR AI COFFEE GUIDE</p>
                         </div>
                     </div>
                     <label for="barista-topic" data-i18n="barista_topic">What would you like help with?</label>
@@ -235,17 +235,23 @@
                         <option value="compare" data-i18n="barista_compare">Compare coffees</option>
                         <option value="brew" data-i18n="barista_brew">Brewing advice</option>
                     </select>
-                    <div class="barista-conversation" role="log" aria-live="polite" aria-relevant="additions text">
-                        <div id="barista-user" class="barista-message barista-message-user" hidden>
+                    <div class="barista-conversation" role="log" aria-live="polite" aria-relevant="additions text" tabindex="0" aria-labelledby="barista-title">
+                        <div class="barista-message barista-message-ai barista-greeting">
+                            <span class="barista-speaker"><img class="bruma-message-avatar" src="assets/bruma/bruma-avatar-close.webp" width="30" height="30" alt="" loading="lazy" decoding="async">Bruma</span>
+                            <p data-i18n="bruma_greeting">Welcome to Terroir. I'm Bruma, your coffee guide. Looking for something smooth, bold, or a little adventurous?</p>
+                        </div>
+                    </div>
+                    <template id="barista-exchange-template">
+                        <div id="barista-user" class="barista-message barista-message-user">
                             <span class="barista-speaker" data-i18n="bruma_you">You</span>
                             <p id="barista-user-text" dir="auto"></p>
                         </div>
-                        <div id="barista-reply" class="barista-message barista-message-ai" hidden>
-                            <span class="barista-speaker">Bruma</span>
+                        <div id="barista-reply" class="barista-message barista-message-ai">
+                            <span class="barista-speaker"><img class="bruma-message-avatar" src="assets/bruma/bruma-avatar-close.webp" width="30" height="30" alt="" loading="lazy" decoding="async">Bruma</span>
                             <p id="barista-answer" dir="auto"></p>
-                            <div id="barista-products" class="quiz-options"></div>
+                            <div id="barista-products" class="quiz-options barista-product-links"></div>
                         </div>
-                    </div>
+                    </template>
                     <label for="barista-question" data-i18n="barista_question">Your question</label>
                     <textarea id="barista-question" name="question" rows="2" maxlength="280" required
                         data-i18n-placeholder="barista_placeholder" placeholder="For example: I like a smooth coffee for a moka pot."></textarea>
