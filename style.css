@@ -1,35 +1,29 @@
-/* 1. СБРОС СТИЛЕЙ И ОБЩИЕ НАСТРОЙКИ */
+/* Base styles */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    /* Чтобы отступы не раздували элементы вширь */
 }
 
 html {
     scroll-behavior: smooth;
-    /* Плавный скролл при клике на меню */
 }
 
 body {
     background-color: #0b0a0a;
-    /* Глубокий, почти черный кофейный оттенок */
     color: #f5f2eb;
-    /* Мягкий молочный цвет для текста вместо едкого белого */
     font-family: 'Montserrat', sans-serif;
     line-height: 1.6;
     overflow-x: hidden;
-    /* Чтобы ничего случайно не вылезло за края экрана */
 }
 
-/* Убираем стандартное подчеркивание у всех ссылок */
 a {
     text-transform: none;
     text-decoration: none;
     color: inherit;
 }
 
-/* 2. СТИЛИЗАЦИЯ ШАПКИ (HEADER) */
+/* Header */
 .header {
     position: fixed;
     top: 0;
@@ -37,17 +31,12 @@ a {
     width: 100%;
     display: flex;
     justify-content: space-between;
-    /* Лого слева, меню по центру, кнопки справа */
     align-items: center;
     padding: 20px 8%;
     background-color: rgba(11, 10, 10, 0.85);
-    /* Полупрозрачный фон */
     backdrop-filter: blur(10px);
-    /* Эффект размытия стекла под шапкой */
     z-index: 1000;
-    /* Чтобы шапка всегда была поверх остальных блоков */
     border-bottom: 1px solid rgba(245, 242, 235, 0.05);
-    /* Едва заметная линия снизу */
 }
 
 .logo {
@@ -56,13 +45,11 @@ a {
     font-weight: 700;
     letter-spacing: 2px;
     color: #d4af37;
-    /* Благородный золотистый оттенок */
 }
 
 .nav {
     display: flex;
     gap: 40px;
-    /* Расстояние между ссылками */
 }
 
 .nav-link {
@@ -71,10 +58,8 @@ a {
     letter-spacing: 1px;
     text-transform: uppercase;
     transition: color 0.3s ease;
-    /* Плавное изменение цвета при наведении */
 }
 
-/* Эффект при наведении мышки на ссылку */
 .nav-link:hover {
     color: #d4af37;
 }
@@ -110,7 +95,7 @@ a {
     section[id] { scroll-margin-top: 130px; }
 }
 
-/* Кнопка переключения языков */
+/* Language switcher */
 .lang-btn {
     background: none;
     border: 1px solid rgba(245, 242, 235, 0.3);
@@ -128,7 +113,7 @@ a {
     color: #d4af37;
 }
 
-/* Кнопка и счетчик корзины */
+/* Shopping bag button and item count */
 .cart-icon-btn {
     background: rgba(212, 175, 55, 0.08);
     border: 1px solid rgba(212, 175, 55, 0.4);
@@ -184,17 +169,14 @@ a {
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
 }
 
-/* 3. ГЛАВНЫЙ ЭКРАН (HERO SECTION) */
+/* Hero */
 .hero {
     min-height: 100vh;
-    /* Растягиваем блок ровно на 100% высоты экрана телефона или ПК */
     display: flex;
     align-items: center;
-    /* Центрируем текст по вертикали */
     padding: 0 8%;
-    /* Выравниваем по левому краю в один ряд с логотипом */
+    /* Align hero content with the header logo. */
 
-    /* Делаем красивый радиальный градиент: в центре чуть светлее, к краям темнее */
     background: radial-gradient(circle at 80% 50%, #1a1512 0%, #0b0a0a 100%);
     position: relative;
     isolation: isolate;
@@ -233,9 +215,8 @@ a {
 
 .hero-content {
     max-width: 650px;
-    /* Чтобы текст не растягивался на всю ширину, а красиво переносился */
     margin-top: 80px;
-    /* Делаем отступ сверху, чтобы шапка не перекрывала текст */
+    /* Offset hero content below the header. */
 }
 
 .hero-subtitle {
@@ -244,7 +225,6 @@ a {
     text-transform: uppercase;
     letter-spacing: 3px;
     color: #b5a285;
-    /* Приглушенный кофейный цвет */
     display: block;
     margin-bottom: 15px;
 }
@@ -252,17 +232,14 @@ a {
 .hero-title {
     font-family: 'Playfair Display', serif;
     font-size: 56px;
-    /* Крупный, премиальный шрифт */
     font-weight: 600;
     line-height: 1.1;
     margin-bottom: 25px;
 }
 
-/* Делаем часть заголовка золотой */
 .hero-title span {
     color: #d4af37;
     font-style: italic;
-    /* Курсив для элегантности */
 }
 
 @media (max-width: 680px) {
@@ -272,15 +249,13 @@ a {
 .hero-description {
     font-size: 16px;
     color: #b5b2aa;
-    /* Немного блеклый цвет для второстепенного текста */
     margin-bottom: 40px;
 }
 
-/* КНОПКИ */
+/* Buttons */
 .hero-buttons {
     display: flex;
     gap: 20px;
-    /* Расстояние между кнопками */
 }
 
 .btn {
@@ -292,10 +267,9 @@ a {
     border-radius: 4px;
     cursor: pointer;
     transition: all 0.3s ease;
-    /* Плавная анимация при наведении */
 }
 
-/* Главная кнопка (залитая золотом) */
+/* Primary button */
 .btn-primary {
     background-color: #d4af37;
     color: #0b0a0a;
@@ -305,10 +279,9 @@ a {
 .btn-primary:hover {
     background-color: transparent;
     color: #d4af37;
-    /* При наведении становится прозрачной с золотым контуром */
 }
 
-/* Второстепенная кнопка (прозрачная) */
+/* Secondary button */
 .btn-secondary {
     background-color: transparent;
     color: #f5f2eb;
@@ -320,14 +293,12 @@ a {
     color: #d4af37;
 }
 
-/* 4. БЛОК МЕНЮ (MENU SECTION) */
+/* Café menu */
 .menu-section {
     padding: 100px 8%;
-    /* Большие отступы сверху и снизу, чтобы сайту "дышалось" */
     background-color: #0b0a0a;
 }
 
-/* Центрируем заголовки секции */
 .section-title-wrapper {
     text-align: center;
     margin-bottom: 60px;
@@ -350,13 +321,12 @@ a {
     letter-spacing: 1px;
 }
 
-/* СЕТКА ДЛЯ МЕНЮ (Вот это важно!) */
+/* Responsive menu grid */
 .menu-grid {
     display: grid;
-    /* Говорим браузеру: "делай колонки шириной минимум 400px. Если они не помещаются — переносы их на новую строку автоматически!" */
+    /* Fit columns of at least 400px, capped by the available width. */
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr));
     gap: 40px 80px;
-    /* Отступы между карточками: 40px по вертикали, 80px по горизонтали */
 }
 
 .menu-item {
@@ -364,12 +334,10 @@ a {
     flex-direction: column;
 }
 
-/* Линия, название и цена в один ряд */
 .menu-item-info {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    /* Выравниваем текст по нижней линии букв */
     margin-bottom: 8px;
 }
 
@@ -379,21 +347,18 @@ a {
     letter-spacing: 0.5px;
 }
 
-/* Та самая линия между названием и ценой */
+/* Dotted price leader */
 .menu-item-line {
     flex-grow: 1;
-    /* Линия занимает всё свободное место между текстом и ценой */
+    /* Fill the space between the item name and price. */
     border-bottom: 1px dotted rgba(245, 242, 235, 0.2);
-    /* Точечная линия */
     margin: 0 15px;
-    /* Отступы слева и справа от линии, чтобы она не липла к буквам */
 }
 
 .menu-item-price {
     font-size: 18px;
     font-weight: 600;
     color: #d4af37;
-    /* Золотая цена */
 }
 
 .menu-item-description {
@@ -402,12 +367,10 @@ a {
     font-weight: 300;
 }
 
-/* 6. БЛОК ИИ БАРИСТА (AI SECTION) */
-/* 5. БЛОК МАГАЗИНА (SHOP SECTION) */
+/* Shop catalog */
 .shop-section {
     padding: 100px 8%;
     background-color: #0d0c0c;
-    /* Чуть светлее основного, чтобы отделить секцию */
 }
 
 .shop-grid {
@@ -468,7 +431,7 @@ a {
     box-shadow: 0 0 12px rgba(212, 175, 55, 0.5);
 }
 
-/* Контейнер для картинки, который держит форму */
+/* Product image frame */
 .product-image-container {
     position: relative;
     width: 100%;
@@ -478,7 +441,6 @@ a {
     border-radius: 8px;
 }
 
-/* Сама картинка */
 .product-image {
     width: 100%;
     height: 100%;
@@ -1256,14 +1218,12 @@ a {
 .ai-section {
     padding: 100px 8%;
     background: radial-gradient(circle at 20% 50%, #151b26 0%, #0b0a0a 100%);
-    /* Легкий космический синеватый отлив для ИИ-атмосферы */
     border-top: 1px solid rgba(245, 242, 235, 0.02);
 }
 
 .ai-container {
     max-width: 800px;
     margin: 0 auto;
-    /* Центрируем весь блок по центру экрана */
     text-align: center;
 }
 
@@ -1274,12 +1234,10 @@ a {
     margin: 15px auto 40px auto;
 }
 
-/* Карточка интерактивного теста */
+/* Quiz card */
 .ai-quiz-card {
     background-color: #11141a;
-    /* Темно-серый с синевой оттенок */
     border: 1px solid rgba(214, 175, 55, 0.1);
-    /* Очень тонкая золотистая рамка */
     border-radius: 12px;
     padding: 40px 30px;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
@@ -1292,7 +1250,7 @@ a {
     letter-spacing: 0.5px;
 }
 
-/* Кнопки вариантов ответов */
+/* Quiz answer buttons */
 .quiz-options {
     display: flex;
     flex-direction: column;
@@ -1312,24 +1270,20 @@ a {
     border-radius: 6px;
     cursor: pointer;
     text-align: left;
-    /* Текст внутри кнопок выравниваем по левому краю */
     transition: all 0.3s ease;
 }
 
-/* Эффект при наведении на вариант ответа */
 .quiz-btn:hover {
     background: rgba(214, 175, 55, 0.08);
     border-color: #d4af37;
     color: #d4af37;
     padding-left: 25px;
-    /* Кнопка красиво сдвигает текст вправо при наведении */
 }
 
 .result-title {
     font-family: 'Playfair Display', serif;
     font-size: 32px;
     color: #d4af37;
-    /* Золотой заголовок результата */
     margin: 15px 0;
 }
 
@@ -1339,32 +1293,31 @@ a {
     font-style: italic;
 }
 
-/* Класс, который будет добавляться кнопке при клике с помощью JS */
+/* Selected answer state */
 .btn-add-to-cart.added {
     background-color: #d4af37 !important;
     border-color: #d4af37 !important;
     color: #0b0a0a !important;
 }
 
-/* 7. БОКОВАЯ КОРЗИНА */
+/* Shopping bag drawer */
 .cart-sidebar {
     position: fixed;
     top: 0;
     right: -450px;
-    /* ПРЯЧЕМ КОРЗИНУ: сдвигаем её вправо за пределы экрана на её полную ширину */
+    /* Hide the drawer outside the viewport. */
     width: min(400px, 100%);
     height: 100vh;
     background-color: #121111;
     box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
     z-index: 2000;
-    /* Корзина должна быть поверх даже нашей шапки */
+    /* Layer the drawer above the header. */
     display: flex;
     flex-direction: column;
     transition: right 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-    /* Плавный выезд */
 }
 
-/* КЛАСС-ТРИГГЕР: Когда мы добавим этот класс с помощью JS, корзина выедет на экран */
+/* Open drawer state */
 .cart-sidebar.open {
     right: 0;
 }
@@ -1419,12 +1372,12 @@ a {
     color: #d4af37;
 }
 
-/* Зона с товарами внутри корзины */
+/* Shopping bag items */
 .cart-sidebar-items {
     flex-grow: 1;
     padding: 40px;
     overflow-y: auto;
-    /* Если товаров много, внутри корзины появится скролл */
+    /* Allow the item list to scroll. */
 }
 
 .empty-cart-msg {
@@ -1434,7 +1387,7 @@ a {
     margin-top: 20px;
 }
 
-/* Низ корзины с итоговой ценой и кнопкой */
+/* Shopping bag summary and actions */
 .cart-sidebar-footer {
     padding: 30px 40px;
     border-top: 1px solid rgba(245, 242, 235, 0.05);
@@ -1459,7 +1412,7 @@ a {
     font-size: .875rem;
 }
 
-/* ТЕМНЫЙ ФОН-ОБЕНТКА (Затемнение остального сайта) */
+/* Shopping bag backdrop */
 .cart-overlay {
     position: fixed;
     top: 0;
@@ -1470,14 +1423,13 @@ a {
     backdrop-filter: blur(4px);
     z-index: 1999;
     display: none;
-    /* Изначально скрыт */
 }
 
 .cart-overlay.open {
     display: block;
 }
 
-/* Стили для строк товаров внутри корзины */
+/* Shopping bag item rows */
 .cart-item-row {
     display: flex;
     justify-content: space-between;
@@ -1495,12 +1447,11 @@ a {
     font-weight: 600;
 }
 
-/* Стили для удаления элементов из корзины */
+/* Item removal controls */
 .cart-item-right {
     display: flex;
     align-items: center;
     gap: 15px;
-    /* Отступ между ценой и крестиком */
 }
 
 .btn-remove-item {
@@ -1515,24 +1466,22 @@ a {
 
 .btn-remove-item:hover {
     color: #e74c3c;
-    /* Красный цвет при наведении */
 }
 
-/* Разделение названия кофе и цены внутри строки */
 .cart-item-info {
     display: flex;
     flex-direction: column;
     gap: 4px;
 }
 
-/* Контейнер для кнопок управления справа */
+/* Item action controls */
 .cart-item-actions {
     display: flex;
     align-items: center;
     gap: 15px;
 }
 
-/* Блок счетчика количества */
+/* Quantity control */
 .quantity-controls {
     display: flex;
     align-items: center;
@@ -1567,7 +1516,7 @@ a {
     text-align: center;
 }
 
-/* Класс для плавной анимации удаления */
+/* Item removal transition */
 .cart-item-row {
     transition: all 0.3s ease;
     opacity: 1;
@@ -1577,9 +1526,8 @@ a {
 .cart-item-row.fade-out {
     opacity: 0;
     transform: translateX(30px);
-    /* Строка плавно улетает вправо */
     margin-top: -50px;
-    /* Схлопываем пустое место под строкой */
+    /* Collapse the removed item's space. */
 }
 
 .lang-switch {
@@ -1601,7 +1549,6 @@ a {
 .lang-btn.active,
 .lang-btn:hover {
     color: #c9a96e;
-    /* Наш золотой акцент */
     border-color: #c9a96e;
 }
 
@@ -1706,7 +1653,7 @@ a {
     .lang-dropdown { transition: none; }
 }
 
-/* 8. БЛОК ОТЗЫВОВ ГОСТЕЙ (TESTIMONIALS SECTION) */
+/* Sample testimonials */
 .testimonials-section {
     padding: 100px 8%;
     background-color: #0b0a0a;
@@ -1774,7 +1721,7 @@ a {
     line-height: 1.6;
 }
 
-/* 9. БЛОК ЛОКАЦИИ И ЧАСОВ РАБОТЫ (LOCATION SECTION) */
+/* Location and opening hours */
 .location-section {
     padding: 100px 8%;
     background-color: #0d0c0c;

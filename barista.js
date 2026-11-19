@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
             if (!response.ok) throw Error('Could not answer');
             const result = await response.json();
-            output.lang = lang === 'ua' ? 'uk' : lang;
+            output.lang = result.language;
             output.textContent = result.answer;
             const products = getStoredProducts();
             for (const id of result.productIds) {
